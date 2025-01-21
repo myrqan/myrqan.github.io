@@ -1,11 +1,44 @@
 @charset "utf-8";
+
 body{
   background-color : #fefaea;
   color : #05208c;
   font-size : 16px;
   padding-left : 30px;
   padding-right : 30px;
+  font-family: sans-serif;
+  font-weight : 400;
 }
+
+.header{
+  height : 100px;
+  clear: both;
+}
+.footer{
+  text-align: right;
+  height: 200px;
+  clear: both;
+}
+.center{
+  padding: 5px;
+  float: left;
+  width: 80%;
+}
+.right{
+  min-height: 100px;
+  float: right;
+  width: 15%;
+}
+.left{
+  min-height: 100px;
+  float: left;
+  width: 15%;
+}
+.main{
+  float: right;
+  width : 80%;
+}
+
 h1{
   max-width: 500px;
   padding-left : 20px;
@@ -26,4 +59,17 @@ h3{
   padding-right : 20px;
   border-left : 5px solid #a1b3fb;
   border-bottom : 1px solid #a1b3fb;
+}
+code{
+  display : inline-block;
+  padding : 5px;
+  background-color : #ccc9bc;
+  color : #33322f;
+  margin : 2.5px;
+}
+
+footer{
+  text-align : right;
+  padding : 5px;
+  border-top : 1px solid #a1b3fb;
 }

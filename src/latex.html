@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <html>
+    <head>
+      <title>LaTeX備忘録</title>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="../style.css" type="text/css">
+      <link rel="shortcut icon" href="../img/favicon.png" type="image/png">
+      <script type="text/javascript" id="MathJax-script" async
+                                     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js">
+      </script>
+    </head>
+
+    <body>
+      <div class="header">
+      </div>
+
+      <div class="main">
+        <div class="center">
+          <h1>\(\LaTeX\)備忘録</h1>
+
+          <h2>プリアンブルの内容</h2>
+          <ul>
+            <li>基本的にはいつも同じファイルを使いまわしている</li>
+            <ul>
+              <li>複数のテンプレートを作っておけば便利</li>
+            </ul>
+            <li><code>\input{hogehoge/preamble_file}</code>
+              と文章に書くことで，<code>hogehoge/preamble_file</code>にあるファイルを読み込むことができる．</li>
+            このときファイル名は正確に書く必要があるが，指定方法は相対パス・絶対パスのどちらでもよい．
+          </ul>
+
+          <h3>よくつかうパッケージ</h3>
+          <p>よく使うパッケージとその内容を以下に列挙する．いずれも<code>\usepackage{name_pf_package}</code>で利用可能．</p>
+          <ul>
+            <li>amsmath, amssymb, amsthm （文章中に使う環境，記号の導入）</li>
+            <li>ascmac（boxnote, itembox, mask, screen, shadeboxとか）</li>
+            <li>comment（文章のある部分をまとめてコメントアウトする）</li>
+            <li>enumitem（箇条書き）</li>
+            <li>fancyhdr（ヘッダーとかフッターを記述するため）</li>
+            <li>here（図表をこの場所！って思う場所に配置する）</li>
+            <li>siunitx（単位のついた数字，例えば，\(3.00 \times 10^{10} \; \mathrm{cm\;s^{-1}}\)とかを簡単に書く）</li>
+            <li>physics2（各種，数式の表記を簡略化してくれる）<br>
+              physicsパッケージはsiunitxとの衝突のため，非推奨．
+              physics2では以下のモジュールを利用することで，表記の簡略化ができる
+            <ul>
+              <li> ab, bracket, diagmat, doubleprod, xmat
+            </ul>
+            それぞれのモジュールは<code>\usephysicsmodule{name_of_module}</code>で利用可能になる．
+              </li>
+              <li>diffcoeff（微分のコマンドを提供, physics2には付属していない）</li>
+          </ul>
+        </div>
+
+        <div class="right">
+        </div>
+      </div>
+
+      <div class="left">
+        <ul>
+          <li><a href="../index.html">HOME</a>を狙う<br></li>
+        </ul>
+      </div>
+
+
+    </body>
+
+    <div class="footer">
+      <small>
+        Home : <a href = "../index.html">crutont0121</a><br>
+        Twitter<img src="../img/twitter.svg" width=20px> : <a href = "https://x.com/roisen_add8e6"> @roisen_add8e6 </a>
+      </small>
+    </div>
+  </html>
