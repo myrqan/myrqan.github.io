@@ -22,6 +22,12 @@ body{
   height: 200px;
   clear: both;
 }
+.title{
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+
+}
 .center{
   padding: 5px;
   float: left;
