@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <html>
+    <head>
+      <title></title>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="../style.css" type="text/css">
+      <link rel="shortcut icon" href="../img/favicon.png" type="image/png">
+      <script type="text/javascript" id="MathJax-script" async
+                                     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js">
+      </script>
+    </head>
+
+    <body>
+      <div class="header">
+        <div class="title">
+          なんかいろんな些細なことをまとめておく
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="center">
+          <h2>
+            gnuplotの操作
+          </h2><br>
+          <ul>
+            <li>あらかじめ，fontがインストールされてコンピュータに認識されていることが必要．</li>
+            <li>gnuplotのマニュアルは丁寧に書いてあるので大体はこれを読めば解決する．</li>
+          </ul>
+          以下に私がよく使っているコードの雛形を示す．(gnuplot ver. 6.0を使用)<br>
+          フォント名などは各自で読み替えてもらえれば良い．
+          <pre>
+          <code>
+reset
+
+mode = 2
+## 1 : "eps"
+## 2: = "qt"
+
+if (mode == 1){
+##################
+## for epscairo ##
+##################
+
+  set terminal epscairo enhanced color \
+    font "NewComputerModern10,17" size 4in, 3in
+  ### use appropriate mode: "color" or "mono"
+  
+  set output "out.eps"
+
+  ## if theta exists, use "NewComputerModernMath"
+  ## argument x, y, ... should be {/NewComputerModern10:Italic x}
+
+  set tics font "NewComputerModernMath, 17"
+  set xlabel font "NewComputerModern10:Italic, 17"
+  set ylabel font "NewComputerModern10:Italic, 17"
+  ##set zlabel font "NewComputerModern10:Italic, 17"
+  set key font "NewComputerModernMath, 17"
+
+  set lmargin at screen 0.13
+  set xtics offset 0,graph 0.05
+  set ytics offset 0,0
+  set xlabel offset graph 0.5, graph 0.15 enhanced
+  set ylabel offset graph 0.055, graph 0.45 enhanced rotate by 90
+  set key spacing 1.6
+  set key below center offset 0, graph 0.05
+}
+else if (mode == 2){
+############
+## for Qt ##
+############
+  set terminal qt font "NewComputerModern10:Regular, 17" enhanced
+  
+  ## if theta exists, use "NewComputerModernMath"
+  ## argument x, y, ... should be {/NewComputerModern10:Italic x}
+
+  ## font setting
+  set tics font "NewComputerModern10:Regular, 17"
+  set xlabel font "NewComputerModern10:Italic, 17"
+  set ylabel font "NewComputerModern10:Italic, 17"
+  ##set zlabel font "NewComputerModern10:Italic, 17"
+  set key font "NewComputerModernMath:Regular, 17"
+  
+  
+  ## position setting
+  set lmargin at screen 0.10
+  set xtics offset 0,graph 0.015
+  set ytics offset 0,0
+  set xlabel offset graph 0.5, graph 0.07 enhanced
+  set ylabel offset graph 0.055, graph 0.45 enhanced rotate 
+  set key spacing 1.6
+  set key below center
+}
+else{
+  print "mode is illegal"
+  exit
+}
+###########################################
+
+### for plotting
+  ## argument x, y, ... should be {/NewComputerModern10:Italic x}
+
+set grid
+
+set tics format "%.1f"
+
+set xrange [0:30]
+set yrange [-1:1]
+
+set xlabel "x"
+set ylabel "y"
+
+plot besj0(x) lw 3 title "besj0({/NewComputerModern10:Italic x})",\
+     besj1(x) lw 3 title "α^2 sin(θ)"
+
+replot 1/sqrt(x)*sin(x-pi/4) lw 3, 1/sqrt(x)*cos(x-pi/4) lw 3
+set term qt
+exit
+          </code>
+          </pre>
+          私の環境では，次の図のような出力になった．（凡例が適当なのは許して：明らかにαsin(θ)じゃないのが混じっています--これは，ギリシャ文字の出力の確認）<br>
+          <center>
+          <img src="../img/gp_tmp.png" width="500px"/><br>
+          </center>
+
+          <h2>
+            fontの確認方法
+          </h2><br>
+          <ul>
+            <li>コンピュータに認識されているフォントは<code>fc-list</code>で取得可能．ただし，そのまま出力すると膨大な数のリストが出てきて，探すのが困難になるため，<code>grep</code>を用いたり，出力ファイルを指定して，そのファイルから検索するという方法が良い．例えば，名前に<code>Computer</code>という文字を含むものを検索する場合は，<code>fc-list | grep Computer</code>とすれば良い．</li>
+          </ul>
+        </div>
+
+        <div class="right">
+          <p>最終更新日：2025-02-02</p>
+        </div>
+
+
+      </div>
+
+      <div class="left">
+        <ul>
+          <li><a href="../index2.html">HOME</a>を狙う</li>
+        </ul>
+      </div>
+
+    </body>
+
+    <div class="footer">
+      <small>
+        Home : <a href = "../index.html">crutont0121</a><br>
+        Twitter : <a href = "https://x.com/roisen_add8e6"> @roisen_add8e6 </a>
+      </small>
+    </div>
+  </html>
