@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>latex.md</title>
+<title>gnuplot.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -379,51 +379,105 @@ code {
           : 'default'
     });
   </script>
-<h2 id="latex%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">$\LaTeX$について</h2>
+<h2 id="gnuplot%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">gnuplotについて</h2>
 <hr>
-<h3 id="%E5%85%A8%E8%88%AC%E7%9A%84%E3%81%AA%E8%A9%B1">全般的な話</h3>
 <ul>
-<li>プリアンブルはテンプレートを作り，それを参照するようにしたほうがいい．<br>
-例えば，<code>\documentclass[a4paper]{ltjsarticle}</code>や<code>\usepackage{amsmath, amssymb}</code>のような，いつも使うパッケージや，<code>\renewcommand</code>などで自分で定義したコマンドなどをまとめて置いておくと良い．<br>
-文書によって設定を変えたいものがある場合は，snippetとして定義して本文ファイル中で呼び出すようにしておくと良い．<br>
-自分はneovimでsnippetを管理している．
-<ul>
-<li><code>\input{path_to_preamble}</code>で<code>path_to_preamble</code>にあるファイルを読み込むことができる．このとき，相対パスでも絶対パスでも良い．<br>
-（プリアンブルの場所を変えることは（ほとんど）ないので，私は絶対パスで指定をしている．）</li>
+<li>フォントを指定するときはあらかじめfontがシステムに認識されていることが必要．</li>
+<li>gnuplotのマニュアルは丁寧です．大体のことはこれを読めば解決する．</li>
 </ul>
-</li>
-</ul>
-<h3 id="%E3%82%88%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%86%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">よくつかうパッケージ</h3>
-<p>よく使うパッケージとその内容を以下に列挙する． いずれも<code>\usepackage{name_of_package}</code>で利用可能． 気になるパッケージがあればターミナルなどで<code>$ texdoc name_of_package</code>とすれば解説のpdf文章が出てくる．（CTANでも検索することができる．）</p>
-<ul>
-<li>amsmath, amssymb, amsthm （文章中に使う環境，記号の導入）</li>
-<li>ascmac（boxnote, itembox, mask, screen, shadeboxとか）</li>
-<li>comment（文章のある部分をまとめてコメントアウトする）</li>
-<li>enumitem（箇条書き）</li>
-<li>fancyhdr（ヘッダーとかフッターを記述するため）</li>
-<li>here（図表をこの場所！って思う場所に配置する）</li>
-<li>siunitx（単位のついた数字，例えば，$3.0 \times 10^{10}\ \text{cm}\ \text{s}^{-1}$とかを簡単に書く）</li>
-<li>physics2（各種，数式の表記を簡略化してくれる）
-<ul>
-<li>physicsパッケージはsiunitxとの衝突のため，<u><strong>非推奨</strong></u>． 詳しくはパッケージの文章を読んでください．<br>
-physics2では以下（など）のモジュールを利用することで，表記の簡略化ができる．
-<ul>
-<li>ab, bracket, diagmat, doubleprod, xmat<br>
-それぞれのモジュールは\usephysicsmodule{name_of_module}で利用可能になる．</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>diffcoeff（微分のコマンドを提供, physics2には付属していない）</li>
-</ul>
-<h3 id="latex%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">$\LaTeX$で使えるフォントを確認する方法</h3>
-<ol>
-<li>ターミナルで<code>$ sudo mktexlsr</code>とする．権限を求められるのでパスワードを入力する．</li>
-<li><code>$ luaotfload-tool --update</code></li>
-<li><code>$ luaotfload-tool --list= &gt; fontslist.txt</code><br>
-これで使用できるフォントがカレントディレクトリの<code>fontslist.txt</code>に一覧として入っている．</li>
-</ol>
-<p>数式で使いたいフォントを検索するときは<code>$ luafindfont math &gt; mathfonts.txt</code>などとして見ることができる．</p>
+<p>gnuplotのコードの雛形を示す．<br>
+フォント名は各自で読み替えてください．</p>
+<details>
+<summary>code example</summary>
+<pre class="hljs"><code><div>reset
+
+mode = 2
+## 1 : &quot;eps&quot;
+## 2: = &quot;qt&quot;
+
+if (mode == 1){
+##################
+## for epscairo ##
+##################
+
+  set terminal epscairo enhanced color \
+    font &quot;NewComputerModern10,17&quot; size 4in, 3in
+  ### use appropriate mode: &quot;color&quot; or &quot;mono&quot;
+  
+  set output &quot;out.eps&quot;
+
+  ## if theta exists, use &quot;NewComputerModernMath&quot;
+  ## argument x, y, ... should be {/NewComputerModern10:Italic x}
+
+  set tics font &quot;NewComputerModernMath, 17&quot;
+  set xlabel font &quot;NewComputerModern10:Italic, 17&quot;
+  set ylabel font &quot;NewComputerModern10:Italic, 17&quot;
+  ##set zlabel font &quot;NewComputerModern10:Italic, 17&quot;
+  set key font &quot;NewComputerModernMath, 17&quot;
+
+  set lmargin at screen 0.13
+  set xtics offset 0,graph 0.05
+  set ytics offset 0,0
+  set xlabel offset graph 0.5, graph 0.15 enhanced
+  set ylabel offset graph 0.055, graph 0.45 enhanced rotate by 90
+  set key spacing 1.6
+  set key below center offset 0, graph 0.05
+}
+else if (mode == 2){
+############
+## for Qt ##
+############
+  set terminal qt font &quot;NewComputerModern10:Regular, 17&quot; enhanced
+  
+  ## if theta exists, use &quot;NewComputerModernMath&quot;
+  ## argument x, y, ... should be {/NewComputerModern10:Italic x}
+
+  ## font setting
+  set tics font &quot;NewComputerModern10:Regular, 17&quot;
+  set xlabel font &quot;NewComputerModern10:Italic, 17&quot;
+  set ylabel font &quot;NewComputerModern10:Italic, 17&quot;
+  ##set zlabel font &quot;NewComputerModern10:Italic, 17&quot;
+  set key font &quot;NewComputerModernMath:Regular, 17&quot;
+  
+  
+  ## position setting
+  set lmargin at screen 0.10
+  set xtics offset 0,graph 0.015
+  set ytics offset 0,0
+  set xlabel offset graph 0.5, graph 0.07 enhanced
+  set ylabel offset graph 0.055, graph 0.45 enhanced rotate 
+  set key spacing 1.6
+  set key below center
+}
+else{
+  print &quot;mode is illegal&quot;
+  exit
+}
+###########################################
+
+### for plotting
+  ## argument x, y, ... should be {/NewComputerModern10:Italic x}
+
+set grid
+
+set tics format &quot;%.1f&quot;
+
+set xrange [0:30]
+set yrange [-1:1]
+
+set xlabel &quot;x&quot;
+set ylabel &quot;y&quot;
+
+plot besj0(x) lw 3 title &quot;besj0({/NewComputerModern10:Italic x})&quot;,\
+	 besj1(x) lw 3 title &quot;besj1({/NewComputerModern10:Italic x})&quot;
+set term qt
+exit
+</div></code></pre>
+</details>
+<p>上のコードを実行すると下のような図になる．</p>
+<img src="./img/gnuplot_tem.png" width=500>
+<h3 id="font%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95">fontの確認方法</h3>
+<p>コンピュータに認識されているフォントは<code>$ fc-list</code>で取得可能．ただし，そのまま出力すると膨大な数のリストが出てきて，探すのが困難になるため，grepを用いたり，出力ファイルを指定して，そのファイルから検索するという方法が良い．例えば，名前に<code>Computer</code>という文字を含むものを検索する場合は，<code>$ fc-list | grep Computer</code>とすれば良い．</p>
 
 </body>
 </html>
