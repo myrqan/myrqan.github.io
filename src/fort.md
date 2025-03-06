@@ -1,0 +1,35 @@
+## fortranで計算のデータを書き出す方法
+
+```fortran
+!== for data output
+foutdat= '(1x, e13.5e3, ",", 1x, e13.5e3)'
+foutmsg= '(1x, "write ", "step=", i8, " t=", e10.3, " nd=", i3)'
+fstopmsg= '(1x, "stop  ", "step=", i8, " t=", e10.3)'
+```
+
+`foutdat`でデータの出力の書式を設定．
+`foutmsg`，`fstopmsg`はターミナル出力用．
+数字は右つめで出力される
+- `1x`は1個の空白：`3x`では3個の空白になる
+- `e13.5e3`は指数表記，幅13桁，小数点以下5桁，指数部3桁
+    - 最後の`e3`の部分は省略可能（省略すると指数部は2桁になる）
+    - `e`の代わりに`f`を使うと指数表記ではない実数になる．例：`168.87512`
+- `i8`は整数を8桁で出力
+- `i3.3`とすると，整数をゼロ埋めした3桁になる．例：`001`, `100`
+
+
+```fortran
+write(fname, '("data/mac", i3.3, ".dat")') nd
+mfile = 10
+open(mfile, file=fname, form='formatted')
+
+write(mfile, foutdat) x, y
+write(*, foutmsg) ns, t, nd
+write(*, fstopmsg) ns, t, nd
+
+close(mfile)
+```
+- 変数`fname`に`data/mac[nd].dat`を代入．`nd`は3桁0埋めの整数が入る．例えば，`data/mac001.dat`など．
+- `mfile`に装置番号（1〜99）を代入．（5：標準入力，6：標準出力らしい）
+- あとは`write`で書き出せば良い．装置番号`mfile`を指定することで`fname`に書き出すことができる．
+- 開いたファイルは`close(mfile)`で閉じる．

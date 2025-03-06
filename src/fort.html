@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>index.md</title>
+<title>fort.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -379,42 +379,42 @@ code {
           : 'default'
     });
   </script>
-<h1 id="home">HOME</h1>
-<p style="text-align: right">
-    作成者のTwitter：<a href="https://twitter.com/roisen_add8e6">くるとん</a>
-</p>
-<h2 id="%E5%90%84%E7%A8%AE%E5%82%99%E5%BF%98%E9%8C%B2%E7%9A%84%E3%81%AA%E4%BD%95%E3%81%8B">各種備忘録的な何か</h2>
-<p>必要になったらまとめる（基本的にはプログラム関係のことが多いかも）<br>
-大したことは書いていないかもしれない．</p>
+<h2 id="fortran%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95">fortranで計算のデータを書き出す方法</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">!== for data output</span>
+foutdat= <span class="hljs-string">'(1x, e13.5e3, ",", 1x, e13.5e3)'</span>
+foutmsg= <span class="hljs-string">'(1x, "write ", "step=", i8, " t=", e10.3, " nd=", i3)'</span>
+fstopmsg= <span class="hljs-string">'(1x, "stop  ", "step=", i8, " t=", e10.3)'</span>
+</div></code></pre>
+<p><code>foutdat</code>でデータの出力の書式を設定．<br>
+<code>foutmsg</code>，<code>fstopmsg</code>はターミナル出力用．<br>
+数字は右つめで出力される</p>
 <ul>
-<li><a href="src/latex.html">LaTeXについて</a>
+<li><code>1x</code>は1個の空白：<code>3x</code>では3個の空白になる</li>
+<li><code>e13.5e3</code>は指数表記，幅13桁，小数点以下5桁，指数部3桁
 <ul>
-<li>雛形は<a href="https://github.com/crutont0121/LaTeX_open/tree/main/prb">github</a>にまとめて置いてある．</li>
+<li>最後の<code>e3</code>の部分は省略可能（省略すると指数部は2桁になる）</li>
+<li><code>e</code>の代わりに<code>f</code>を使うと指数表記ではない実数になる．例：<code>168.87512</code></li>
 </ul>
 </li>
-<li><a href="src/gnuplot.html">gnuplotの操作について</a></li>
-<li><a href="src/fort.html">fortranについて</a>
+<li><code>i8</code>は整数を8桁で出力</li>
+<li><code>i3.3</code>とすると，整数をゼロ埋めした3桁になる．例：<code>001</code>, <code>100</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-built_in">write</span>(fname, <span class="hljs-string">'("data/mac", i3.3, ".dat")'</span>) nd
+mfile = <span class="hljs-number">10</span>
+open(mfile, <span class="hljs-keyword">file</span>=fname, <span class="hljs-keyword">form</span>=<span class="hljs-string">'formatted'</span>)
+
+<span class="hljs-built_in">write</span>(mfile, foutdat) x, y
+<span class="hljs-built_in">write</span>(*, foutmsg) ns, t, nd
+<span class="hljs-built_in">write</span>(*, fstopmsg) ns, t, nd
+
+close(mfile)
+</div></code></pre>
 <ul>
-<li>計算結果を外部ファイルに保存</li>
+<li>変数<code>fname</code>に<code>data/mac[nd].dat</code>を代入．<code>nd</code>は3桁0埋めの整数が入る．例えば，<code>data/mac001.dat</code>など．</li>
+<li><code>mfile</code>に装置番号（1〜99）を代入．（5：標準入力，6：標準出力らしい）</li>
+<li>あとは<code>write</code>で書き出せば良い．装置番号<code>mfile</code>を指定することで<code>fname</code>に書き出すことができる．</li>
+<li>開いたファイルは<code>close(mfile)</code>で閉じる．</li>
 </ul>
-</li>
-<li><a href="src/cmd.html">コマンドライン操作について</a>
-<ul>
-<li>複数png→gifの方法（magickを使う）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="%E3%81%8A%E5%8B%89%E5%BC%B7%E9%96%A2%E9%80%A3">お勉強関連</h2>
-<p>pdfを置いておく．<br>
-ObsidianやTeXで作った勉強ノートとかをあげたい</p>
-<ul>
-<li><a href="src/doc/jackson3_app1.pdf">Legendre多項式についての公式</a><br>
-（Jackson電磁気学eq. (3.25)→(3.26)について）</li>
-<li><a href="src/doc/lin_hyp.pdf">線形双曲型問題に対しての数値計算手法</a><br>
-（FTCS, Lax, Leap-Frog, Lax-Wendroff, MacCormack, 1次精度風上差分について）</li>
-</ul>
-<hr>
 
 </body>
 </html>

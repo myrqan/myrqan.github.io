@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>index.md</title>
+<title>cmd.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -379,42 +379,12 @@ code {
           : 'default'
     });
   </script>
-<h1 id="home">HOME</h1>
-<p style="text-align: right">
-    作成者のTwitter：<a href="https://twitter.com/roisen_add8e6">くるとん</a>
-</p>
-<h2 id="%E5%90%84%E7%A8%AE%E5%82%99%E5%BF%98%E9%8C%B2%E7%9A%84%E3%81%AA%E4%BD%95%E3%81%8B">各種備忘録的な何か</h2>
-<p>必要になったらまとめる（基本的にはプログラム関係のことが多いかも）<br>
-大したことは書いていないかもしれない．</p>
+<h2 id="png%E3%82%92%E7%B5%B1%E5%90%88%E3%81%97%E3%81%A6gif%E3%82%92%E4%BD%9C%E3%82%8B">pngを統合してgifを作る</h2>
+<pre class="hljs"><code><div>$ magick $(ls *.png | sort -V) out.gif
+</div></code></pre>
 <ul>
-<li><a href="src/latex.html">LaTeXについて</a>
-<ul>
-<li>雛形は<a href="https://github.com/crutont0121/LaTeX_open/tree/main/prb">github</a>にまとめて置いてある．</li>
+<li><code>ls</code>でpngを探して<code>sort</code>したものを<code>magick</code>に渡す．上の例では出力ファイル名は<code>out.gif</code>になっている．</li>
 </ul>
-</li>
-<li><a href="src/gnuplot.html">gnuplotの操作について</a></li>
-<li><a href="src/fort.html">fortranについて</a>
-<ul>
-<li>計算結果を外部ファイルに保存</li>
-</ul>
-</li>
-<li><a href="src/cmd.html">コマンドライン操作について</a>
-<ul>
-<li>複数png→gifの方法（magickを使う）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="%E3%81%8A%E5%8B%89%E5%BC%B7%E9%96%A2%E9%80%A3">お勉強関連</h2>
-<p>pdfを置いておく．<br>
-ObsidianやTeXで作った勉強ノートとかをあげたい</p>
-<ul>
-<li><a href="src/doc/jackson3_app1.pdf">Legendre多項式についての公式</a><br>
-（Jackson電磁気学eq. (3.25)→(3.26)について）</li>
-<li><a href="src/doc/lin_hyp.pdf">線形双曲型問題に対しての数値計算手法</a><br>
-（FTCS, Lax, Leap-Frog, Lax-Wendroff, MacCormack, 1次精度風上差分について）</li>
-</ul>
-<hr>
 
 </body>
 </html>
