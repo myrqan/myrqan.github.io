@@ -1,10 +1,5 @@
 # HOME
 ---
-## とりあえず
-テストとして数式を打ってみる．これはBessel関数の母関数：
-$$
-\sum_{m=-\infty}^\infty J_m(x)t^m = \exp\left[\frac{x}{2}\left(t - \frac{1}{t}\right)\right]
-$$
 
 ## 各種備忘録的な何か
 必要になったらまとめる（基本的にはプログラム関係のことが多いかも） 

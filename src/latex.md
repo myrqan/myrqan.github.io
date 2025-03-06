@@ -1,4 +1,4 @@
-## $\LaTeX$について
+## LaTeXについて
 ---
 ### 全般的な話
 - プリアンブルはテンプレートを作り，それを参照するようにしたほうがいい． 
@@ -24,7 +24,7 @@
       それぞれのモジュールは\usephysicsmodule{name_of_module}で利用可能になる．
 - diffcoeff（微分のコマンドを提供, physics2には付属していない）
 
-### $\LaTeX$で使えるフォントを確認する方法
+### LaTeXで使えるフォントを確認する方法
 1. ターミナルで`$ sudo mktexlsr`とする．権限を求められるのでパスワードを入力する．
 1. `$ luaotfload-tool --update`
 1. `$ luaotfload-tool --list= > fontslist.txt`
