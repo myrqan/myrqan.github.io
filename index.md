@@ -20,12 +20,14 @@ neovimのプラグインは今のところ，[lazy.nvim](https://lazy.folke.io)�
 
 ---
 ## お勉強関連
-pdfを置いておく．
-ObsidianやTeXで作った勉強ノートとかをあげたい
-- [Legendre多項式についての公式](src/doc/jackson3_app1.pdf) 
+pdfなどを置いておく．
+ObsidianやTeXで作った勉強ノートとかをあげる．
+- [Legendre多項式についての公式(pdf)](src/doc/jackson3_app1.pdf) 
     （Jackson電磁気学eq. (3.25)→(3.26)について）
-- [線形双曲型問題に対しての数値計算手法](src/doc/lin_hyp.pdf)
+- [線形双曲型問題に対しての数値計算手法について(pdf)](src/doc/lin_hyp.pdf)
     （FTCS, Lax, Leap-Frog, Lax-Wendroff, MacCormack, 1次精度風上差分について）
+- [おすすめの本](src/book.html)
+    （数学と物理の本を紹介）
 
 ***
 
