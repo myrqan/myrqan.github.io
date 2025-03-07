@@ -379,8 +379,7 @@ code {
           : 'default'
     });
   </script>
-<h2 id="gnuplot%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">gnuplotについて</h2>
-<hr>
+<h1 id="gnuplot%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">gnuplotについて</h1>
 <ul>
 <li>フォントを指定するときはあらかじめfontがシステムに認識されていることが必要．</li>
 <li>gnuplotのマニュアルは丁寧です．大体のことはこれを読めば解決する．</li>
@@ -476,7 +475,7 @@ exit
 </details>
 <p>上のコードを実行すると下のような図になる．</p>
 <img src="./img/gnuplot_tem.png" width=500>
-<h3 id="font%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95">fontの確認方法</h3>
+<h2 id="font%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95">fontの確認方法</h2>
 <p>コンピュータに認識されているフォントは<code>$ fc-list</code>で取得可能．ただし，そのまま出力すると膨大な数のリストが出てきて，探すのが困難になるため，grepを用いたり，出力ファイルを指定して，そのファイルから検索するという方法が良い．例えば，名前に<code>Computer</code>という文字を含むものを検索する場合は，<code>$ fc-list | grep Computer</code>とすれば良い．</p>
 
 </body>
