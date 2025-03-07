@@ -16,6 +16,8 @@
 - [コマンドライン操作について](src/cmd.html)
     - 複数png→gifの方法（magickを使う）
 
+neovimのプラグインは今のところ，[lazy.nvim](https://lazy.folke.io)と[mason.nvim](https://github.com/williamboman/mason.nvim)を使って管理しています．
+
 ---
 ## お勉強関連
 pdfを置いておく．
