@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>cmd.md</title>
+<title>tips.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -379,6 +379,51 @@ code {
           : 'default'
     });
   </script>
+<h1 id="%E5%B0%8F%E3%83%8D%E3%82%BF%E9%9B%86">小ネタ集</h1>
+<p>実行環境は<code>zsh 5.9 (arm-apple-darwin24.0.0)</code></p>
+<ul>
+<li><a href="#%E5%B0%8F%E3%83%8D%E3%82%BF%E9%9B%86">小ネタ集</a>
+<ul>
+<li><a href="#factor%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89--prime%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89"><code>factor</code>コマンド / <code>prime</code>コマンド</a></li>
+<li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E4%B8%AD%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E6%95%B0">ディレクトリ中のファイル・フォルダの数</a></li>
+<li><a href="#png%E3%82%92%E7%B5%B1%E5%90%88%E3%81%97%E3%81%A6gif%E3%82%92%E4%BD%9C%E3%82%8B">pngを統合してgifを作る</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="factor%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89--prime%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89"><code>factor</code>コマンド / <code>prime</code>コマンド</h2>
+<p>入力した数を因数分解する．オプションとして<code>-h</code>，<code>--exponents</code>で指数表記にできる．<br>
+入力した数が素数か判定する．<br>
+例- <a href="#%E5%B0%8F%E3%83%8D%E3%82%BF%E9%9B%86">小ネタ集</a></p>
+<pre class="hljs"><code><div><span class="hljs-meta">$</span><span class="bash"> factor 100</span>
+100: 2 2 5 5
+<span class="hljs-meta">
+$</span><span class="bash"> factor -h 100</span>
+100: 2^2 5^2
+<span class="hljs-meta">
+$</span><span class="bash"> factor -h 65537</span>
+65537: 65537
+<span class="hljs-meta">
+$</span><span class="bash"> openssl prime 918247</span>
+E02E7 (918247) is not prime
+<span class="hljs-meta">
+$</span><span class="bash"> openssl prime 100003</span>
+186A3 (100003) is prime
+<span class="hljs-meta">
+$</span><span class="bash"> <span class="hljs-built_in">echo</span> -n <span class="hljs-string">"number: "</span>; <span class="hljs-built_in">read</span> num; [ <span class="hljs-string">"<span class="hljs-variable">$num</span>"</span> -eq 1 ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">"is NOT prime"</span> || ([ $(factor <span class="hljs-string">"<span class="hljs-variable">$num</span>"</span> | wc -w) -gt 2 ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">"is NOT prime"</span> || <span class="hljs-built_in">echo</span> <span class="hljs-string">"is prime"</span>)</span>
+number: 100000000000031
+is prime
+</div></code></pre>
+<h2 id="%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E4%B8%AD%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%BB%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E6%95%B0">ディレクトリ中のファイル・フォルダの数</h2>
+<pre class="hljs"><code><div><span class="hljs-meta">$</span><span class="bash"> ls | wc -l</span>
+</div></code></pre>
+<p>例えば，</p>
+<pre class="hljs"><code><div>$ touch test_{001..050}.txt
+</div></code></pre>
+<p>で50個の連番ファイル（<code>test_001.txt</code>から<code>test_050.txt</code>）を作ったとすると</p>
+<pre class="hljs"><code><div><span class="hljs-meta">$</span><span class="bash"> ls | wc -l</span>
+50
+</div></code></pre>
+<p>となる．</p>
 <h2 id="png%E3%82%92%E7%B5%B1%E5%90%88%E3%81%97%E3%81%A6gif%E3%82%92%E4%BD%9C%E3%82%8B">pngを統合してgifを作る</h2>
 <pre class="hljs"><code><div>$ magick $(ls *.png | sort -V) out.gif
 </div></code></pre>
