@@ -14,18 +14,33 @@
 ---
 
 ## 物理
+途中まで読んだものには☆をしている．割とちゃんと読んだ本には☆をつけていない．
 - *基幹講座 物理学 力学*，（篠本・坂口），東京図書
   > クラス指定授業の教科書．高校力学の延長の感じで読める．易しい．
 - *基幹講座 物理学 解析力学*，（畑），東京図書
   > 解析力学初学でも読みやすかった．解析力学がわかった気になれる．ゼミ・授業で使用．
-- *A Treatise on the Analytical Dynamics of Particles and Rigid Bodies*，（Whittaker），Cambridge University Press
+- ☆*A Treatise on the Analytical Dynamics of Particles and Rigid Bodies*，（Whittaker），Cambridge University Press
   > Chapter 6に剛体の力学（解析力学）が載っている．例をいっぱいあげていて良さげな印象．ちゃんと読みたい．
 - *物理テキストシリーズ 電磁気学*，（砂川），岩波書店
   > 薄いほうの砂川電磁気学．こっちは初学者向きで読みやすい．薄いのですぐ読み終えることができる．電磁気学の1冊めとしてこれを読んだ．
-- *Classical Electodynamics (3rd ed.)*，（Jackson），John Wiley & Sons
+- ☆*Classical Electodynamics (3rd ed.)*，（Jackson），John Wiley & Sons
   > 電磁気学2冊めのひとに良さげ．演習問題をとこう．解説がないので難しいかも．
   > 電磁気学の洋書ではGriffithsもあるが，これはJacksonよりも易しく，初学でも読みやすい．1冊めとしてGriffithsを読んでもいいかもしれない．
-- *シリーズ宇宙物理学の基礎 宇宙流体力学の基礎［改訂版］*，（福江・和田・梅村），日本評論社
+- ☆*シリーズ宇宙物理学の基礎 宇宙流体力学の基礎［改訂版］*，（福江・和田・梅村），日本評論社
   > 流体力学の宇宙物理学への応用について，主要な部分を押さえてある．読みやすい．
-- *Statistical Mechanics (4th ed.)*，(Pathria & Beale)，Academic Press
+- ☆*Statistical Mechanics (4th ed.)*，(Pathria & Beale)，Academic Press
   > 洋書でもよければ，統計力学の本としてこんなものがある．演習問題が充実している印象．
+
+---
+
+## 気になっているけどまだ（ちゃんと）読めていない本
+- *Gravity: An Introduction to Einstein's General Relativity*，(Hartle)，Cambridge University Press
+  > [website](https://web.physics.ucsb.edu/~gravitybook/) (errata etc.)
+- *An Introduction to General Relativity Spacetime and Geometry*, (Sean M. Carroll)
+  > [website](https://www.preposterousuniverse.com/spacetimeandgeometry/)
+- *Quantum Mechanics*, (Claude Cohen-Tannoudji, Bernard Diu, Franck Laloë)
+- *Modern Quantum Mechanics (3rd ed.)*, (J. J. Sakurai , Jim Napolitano)
+- *Classical Mechanics (3rd ed.)*, (Goldstein, Poole, Safko)
+- *Fluid Mechanics (2nd ed.)*, (Landau, Lifshitz)
+- *Optics (5th ed.)*, (Eugene Hecht)
+- *Introdution to Magnetohydrodynamics (2nd ed.)* (P. A. Davidson)
