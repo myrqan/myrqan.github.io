@@ -1,3 +1,9 @@
+# Fortranについてのtips
+
+- [Fortranについてのtips](#fortranについてのtips)
+  - [fortranで計算のデータを書き出す方法](#fortranで計算のデータを書き出す方法)
+---
+
 ## fortranで計算のデータを書き出す方法
 
 ```fortran
