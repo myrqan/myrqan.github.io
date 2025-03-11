@@ -36,3 +36,10 @@ ObsidianやTeXで作った勉強ノートとかをあげる．
     （数学と物理の本を紹介）
 
 ***
+
+<div style="height: 30em;"></div>
+
+<p style="text-align: right">
+趣味のページ<!-- omit in toc --><br>
+<a href="src/hb.html">こっち</a>
+</p>
