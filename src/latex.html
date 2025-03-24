@@ -386,6 +386,7 @@ code {
 <li><a href="#%E5%85%A8%E8%88%AC%E7%9A%84%E3%81%AA%E8%A9%B1">全般的な話</a></li>
 <li><a href="#%E3%82%88%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%86%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">よくつかうパッケージ</a></li>
 <li><a href="#latex%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">LaTeXで使えるフォントを確認する方法</a></li>
+<li><a href="#%E5%B0%8F%E3%83%8D%E3%82%BF">小ネタ</a></li>
 </ul>
 </li>
 </ul>
@@ -403,7 +404,7 @@ code {
 </li>
 </ul>
 <h2 id="%E3%82%88%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%86%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">よくつかうパッケージ</h2>
-<p>よく使うパッケージとその内容を以下に列挙する． いずれも<code>\usepackage{name_of_package}</code>で利用可能． 気になるパッケージがあればターミナルなどで<code>$ texdoc name_of_package</code>とすれば解説のpdf文章が出てくる．（CTANでも検索することができる．）</p>
+<p>よく使うパッケージとその内容を以下に列挙する． いずれも<code>\usepackage{name_of_package}</code>で利用可能． 気になるパッケージがあればターミナルなどで<code>$ texdoc name_of_package</code>とすれば解説のpdf文章が出てくる．（<a href="https://ctan.org">CTAN</a>でも検索することができる．）</p>
 <ul>
 <li>amsmath, amssymb, amsthm （文章中に使う環境，記号の導入）</li>
 <li>ascmac（boxnote, itembox, mask, screen, shadeboxとか）</li>
@@ -433,6 +434,11 @@ physics2では以下（など）のモジュールを利用することで，表
 これで使用できるフォントがカレントディレクトリの<code>fontslist.txt</code>に一覧として入っている．</li>
 </ol>
 <p>数式で使いたいフォントを検索するときは<code>$ luafindfont math &gt; mathfonts.txt</code>などとして見ることができる．</p>
+<h2 id="%E5%B0%8F%E3%83%8D%E3%82%BF">小ネタ</h2>
+<ul>
+<li><code>\raisebox{height}{hoge}</code>で文字<code>hoge</code>を<code>height</code>だけあげることができる．<br>
+基本はこの使いかたで十分</li>
+</ul>
 
 </body>
 </html>

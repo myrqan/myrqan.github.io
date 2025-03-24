@@ -4,6 +4,7 @@
   - [全般的な話](#全般的な話)
   - [よくつかうパッケージ](#よくつかうパッケージ)
   - [LaTeXで使えるフォントを確認する方法](#latexで使えるフォントを確認する方法)
+  - [小ネタ](#小ネタ)
 ---
 
 ## 全般的な話
@@ -15,7 +16,7 @@
     （プリアンブルの場所を変えることは（ほとんど）ないので，私は絶対パスで指定をしている．）
 
 ## よくつかうパッケージ
-よく使うパッケージとその内容を以下に列挙する． いずれも`\usepackage{name_of_package}`で利用可能． 気になるパッケージがあればターミナルなどで`$ texdoc name_of_package`とすれば解説のpdf文章が出てくる．（CTANでも検索することができる．）
+よく使うパッケージとその内容を以下に列挙する． いずれも`\usepackage{name_of_package}`で利用可能． 気になるパッケージがあればターミナルなどで`$ texdoc name_of_package`とすれば解説のpdf文章が出てくる．（[CTAN](https://ctan.org)でも検索することができる．）
 - amsmath, amssymb, amsthm （文章中に使う環境，記号の導入）
 - ascmac（boxnote, itembox, mask, screen, shadeboxとか）
 - comment（文章のある部分をまとめてコメントアウトする）
@@ -37,3 +38,7 @@
 これで使用できるフォントがカレントディレクトリの`fontslist.txt`に一覧として入っている．
 
 数式で使いたいフォントを検索するときは`$ luafindfont math > mathfonts.txt`などとして見ることができる．
+
+## 小ネタ
+- `\raisebox{height}{hoge}`で文字`hoge`を`height`だけあげることができる．
+  基本はこの使いかたで十分
