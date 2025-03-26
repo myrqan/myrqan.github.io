@@ -1,7 +1,10 @@
 ## 日報とか
 
 2025年度には書きたい．いつまで続くか．週一とかで更新したい
-
+<details>
+<summary>週報</summary>
+- <a href="daily/2025w13.html">2025 W13</a>
+</details>
 ---
 
 ## 好きな音楽
