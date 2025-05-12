@@ -227,79 +227,76 @@ pre code {
 </style>
 
 <style>
-/* Tomorrow Theme */
-/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
-/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+/*
 
-/* Tomorrow Comment */
-.hljs-comment,
-.hljs-quote {
-	color: #8e908c;
-}
+School Book style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
 
-/* Tomorrow Red */
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-regexp,
-.hljs-deletion {
-	color: #c82829;
-}
-
-/* Tomorrow Orange */
-.hljs-number,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-literal,
-.hljs-type,
-.hljs-params,
-.hljs-meta,
-.hljs-link {
-	color: #f5871f;
-}
-
-/* Tomorrow Yellow */
-.hljs-attribute {
-	color: #eab700;
-}
-
-/* Tomorrow Green */
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-addition {
-	color: #718c00;
-}
-
-/* Tomorrow Blue */
-.hljs-title,
-.hljs-section {
-	color: #4271ae;
-}
-
-/* Tomorrow Purple */
-.hljs-keyword,
-.hljs-selector-tag {
-	color: #8959a8;
-}
+*/
 
 .hljs {
-	display: block;
-	overflow-x: auto;
-	color: #4d4d4c;
-	padding: 0.5em;
+  display: block;
+  overflow-x: auto;
+  padding: 15px 0.5em 0.5em 30px;
+  font-size: 11px;
+  line-height:16px;
+  background:#f6f6ae url(./school-book.png);
+  border-top: solid 2px #d2e8b9;
+  border-bottom: solid 1px #d2e8b9;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color:#005599;
+  font-weight:bold;
+}
+
+.hljs,
+.hljs-subst {
+  color: #3e5915;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-link {
+  color: #2c009f;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #e60415;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-name,
+.hljs-selector-id,
+.hljs-strong {
+  font-weight: bold;
 }
 
 .hljs-emphasis {
-	font-style: italic;
+  font-style: italic;
 }
 
-.hljs-strong {
-	font-weight: bold;
-}
 </style>
 
 <style>
@@ -383,7 +380,11 @@ code {
 <ul>
 <li><a href="#fortran%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AEtips">Fortranについてのtips</a>
 <ul>
-<li><a href="#fortran%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95">fortranで計算のデータを書き出す方法</a></li>
+<li><a href="#fortran%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95">fortranで計算のデータを書き出す方法</a>
+<ul>
+<li><a href="#%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%81%A7%E3%81%AE%E5%87%BA%E5%8A%9B">バイナリでの出力</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -424,6 +425,24 @@ close(mfile)
 <li>あとは<code>write</code>で書き出せば良い．装置番号<code>mfile</code>を指定することで<code>fname</code>に書き出すことができる．</li>
 <li>開いたファイルは<code>close(mfile)</code>で閉じる．</li>
 </ul>
+<h3 id="%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%81%A7%E3%81%AE%E5%87%BA%E5%8A%9B">バイナリでの出力</h3>
+<p>たとえば，</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">program</span></span> main
+<span class="hljs-keyword">implicit</span> <span class="hljs-keyword">none</span>
+<span class="hljs-keyword">integer</span> :: idf
+idf = <span class="hljs-number">6</span>
+open(idf,<span class="hljs-keyword">file</span>=<span class="hljs-string">'t.dac'</span>,<span class="hljs-keyword">form</span>=<span class="hljs-string">'unformatted'</span>)
+<span class="hljs-built_in">write</span>(idf) <span class="hljs-number">1</span>
+<span class="hljs-keyword">end</span>
+</div></code></pre>
+<p>などとして<code>t.dac</code>にその結果を書き込むとすると，<code>form=unformatted</code>の場合は，</p>
+<pre class="hljs"><code><div>00000000: 0400 0000 0100 0000 0400 0000 
+</div></code></pre>
+<p>としてかき込まれ，（たとえば，vimでバイナリファイルを見るには<code>vim -b t.dac</code>で開き，vim内で<code>:%!xxd</code>とすればよい.）これは<code>4 1 4</code>と書かれていることに相当する．<code>unformatted</code>の場合は，最初と最後にrecord markerとして4 byte分が使用されており，実際の数値はその間に書かれている．この場合は<code>1</code>が書き込まれていることがわかる．</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">write</span>(idf) <span class="hljs-number">1.d0</span>
+</div></code></pre>
+<p>とすると，出力は<code>0800 0000 0000 0000 0000 f03f 0800 0000</code>となり，これを解釈すると，<br>
+<code>0800 0000 | 0000 0000 0000 f03f | 0800 0000</code>→<code>8 1.0 8</code>ということになる．</p>
 
 </body>
 </html>
