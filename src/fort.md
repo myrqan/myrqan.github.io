@@ -86,13 +86,13 @@ write(idf) 1.d0
   write(mid) a
 ```
 としたとき，4行3列の配列$A$は
-$$
-A = \left(\begin{matrix}
- 11 & 12 & 13 \\
- 21 & 22 & 23 \\
- 31 & 32 & 33 \\
- 41 & 42 & 43\end{matrix}\right)
-$$
+```txt
+A = 
+[[11 12 13]
+ [21 22 23]
+ [31 32 33]
+ [41 42 43]]
+```
 で格納されるが，これをpythonから見たい，操作したいとすると，
 ```python
 import numpy as np
