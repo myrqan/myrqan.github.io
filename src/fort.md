@@ -93,3 +93,17 @@ A = \left(\begin{matrix}
  31 & 32 & 33 \\
  41 & 42 & 43\end{matrix}\right)
 $$
+で格納されるが，これをpythonから見たい，操作したいとすると，
+```python
+import numpy as np
+from scipy.io import FortranFile
+row = 4,
+col = 3
+a = f.read_record('i4').reshape(col,row,order='F')
+a = np.array(a)
+print(a)
+```
+とすれば，`a`はnumpy.arrayとして使用ができる．
+
+fortran側で，DOUBLE PRECISIONを使用した場合は，`i4`の部分を`f8`に置き換えれば良い．
+
