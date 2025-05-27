@@ -382,7 +382,11 @@ code {
 <ul>
 <li><a href="#fortran%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95">fortranで計算のデータを書き出す方法</a>
 <ul>
-<li><a href="#%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%81%A7%E3%81%AE%E5%87%BA%E5%8A%9B">バイナリでの出力</a></li>
+<li><a href="#%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%81%A7%E3%81%AE%E5%87%BA%E5%8A%9B">バイナリでの出力</a>
+<ul>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">二次元配列について</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -441,8 +445,33 @@ open(idf,<span class="hljs-keyword">file</span>=<span class="hljs-string">'t.dac
 <p>としてかき込まれ，（たとえば，vimでバイナリファイルを見るには<code>vim -b t.dac</code>で開き，vim内で<code>:%!xxd</code>とすればよい.）これは<code>4 1 4</code>と書かれていることに相当する．<code>unformatted</code>の場合は，最初と最後にrecord markerとして4 byte分が使用されており，実際の数値はその間に書かれている．この場合は<code>1</code>が書き込まれていることがわかる．</p>
 <pre class="hljs"><code><div><span class="hljs-built_in">write</span>(idf) <span class="hljs-number">1.d0</span>
 </div></code></pre>
-<p>とすると，出力は<code>0800 0000 0000 0000 0000 f03f 0800 0000</code>となり，これを解釈すると，<br>
-<code>0800 0000 | 0000 0000 0000 f03f | 0800 0000</code>→<code>8 1.0 8</code>ということになる．</p>
+<p>とすると，出力は</p>
+<pre class="hljs"><code><div>0800 0000 0000 0000 0000 f03f 0800 0000
+</div></code></pre>
+<p>となり，これを解釈すると，</p>
+<pre class="hljs"><code><div>0800 0000 | 0000 0000 0000 f03f | 0800 0000
+→ 8 1.0 8
+</div></code></pre>
+<p>ということになる．（この場合は，中身がdouble precisionということがわかっていないといけない．）</p>
+<h4 id="%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">二次元配列について</h4>
+<p>例えばfortranで</p>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">integer</span> :: a(<span class="hljs-number">4</span>,<span class="hljs-number">3</span>)
+  <span class="hljs-keyword">integer</span> :: i, j
+  <span class="hljs-keyword">do</span> j = <span class="hljs-number">1</span>, <span class="hljs-number">3</span>
+  <span class="hljs-keyword">do</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">4</span>
+    a(i,j) = i*<span class="hljs-number">10</span> + j
+  <span class="hljs-keyword">enddo</span>
+  <span class="hljs-keyword">enddo</span>
+  <span class="hljs-built_in">write</span>(mid) a
+</div></code></pre>
+<p>としたとき，4行3列の配列$A$は<br>
+$$<br>
+A = \left(\begin{matrix}<br>
+11 &amp; 12 &amp; 13 \<br>
+21 &amp; 22 &amp; 23 \<br>
+31 &amp; 32 &amp; 33 \<br>
+41 &amp; 42 &amp; 43\end{matrix}\right)<br>
+$$</p>
 
 </body>
 </html>
