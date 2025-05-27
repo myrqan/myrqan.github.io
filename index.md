@@ -13,13 +13,13 @@
 ## 各種備忘録的な何か
 必要になったらまとめる（基本的にはプログラム関係のことが多いかも） 
 大したことは書いていないかもしれない．
-- [LaTeXについて](src/latex.html)
+- [LaTeXについて](src/latex.md)
     - 雛形は[github](https://github.com/crutont0121/LaTeX_open/tree/main/prb)にまとめて置いてある．
-- [gnuplotの操作について](src/gnuplot.html)
+- [gnuplotの操作について](src/gnuplot.md)
     - 雛形を置いてある
-- [fortranについて](src/fort.html)
+- [fortranについて](src/fort.md)
     - 計算結果を外部ファイルに保存
-- [小ネタ集め](src/tips.html)
+- [小ネタ集め](src/tips.md)
     - 態態一記事にするまでもないことをまとめる
 
 neovimのプラグインは今のところ，[lazy.nvim](https://lazy.folke.io)と[mason.nvim](https://github.com/williamboman/mason.nvim)を使って管理しています．
@@ -32,7 +32,7 @@ ObsidianやTeXで作った勉強ノートとかをあげる．
     （Jackson電磁気学eq. (3.25)→(3.26)について）
 - [線形双曲型問題に対しての数値計算手法について(pdf)](src/doc/lin_hyp.pdf)
     （FTCS, Lax, Leap-Frog, Lax-Wendroff, MacCormack, 1次精度風上差分について）
-- [おすすめの本](src/book.html)
+- [おすすめの本](src/book.md)
     （数学と物理の本を紹介）
 
 ***
