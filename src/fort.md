@@ -76,34 +76,74 @@ write(idf) 1.d0
 #### 二次元配列について
 例えばfortranで
 ```fortran
-  integer :: a(4,3)
-  integer :: i, j
-  do j = 1, 3
-  do i = 1, 4
-    a(i,j) = i*10 + j
+  INTEGER,PARAMETER::xix=5,xjx=4
+  DOUBLE PRECISION :: x(xix,xjx)
+  INTEGER,PARAMETER::aix=4,ajx=3
+  DOUBLE PRECISION :: a(aix,ajx)
+  INTEGER::mid
+  INTEGER :: i, j
+
+  do j = 1, xjx
+  do i = 1, xix
+    x(i,j) = i*1.0d1 + j*0.1d0
   enddo
   enddo
+  do j = 1, ajx
+  do i = 1, aix
+    a(i,j) = i*1.0d0 + j*0.1d0
+  enddo
+  enddo
+
+  mid = 10
+  open(mid, file='t.dac', form='unformatted')
+  write(mid) aix,ajx
   write(mid) a
+  write(mid) xix,xjx
+  write(mid) x
+
+
 ```
-としたとき，4行3列の配列$A$は
+としたとき，4行3列の配列`A`と5行4列の配列`X`は
 ```txt
 A = 
-[[11 12 13]
- [21 22 23]
- [31 32 33]
- [41 42 43]]
+[[1.1 1.2 1.3]
+ [2.1 2.2 2.3]
+ [3.1 3.2 3.3]
+ [4.1 4.2 4.3]]
+
+X =
+[[10.1 10.2 10.3 10.4]
+ [20.1 20.2 20.3 20.4]
+ [30.1 30.2 30.3 30.4]
+ [40.1 40.2 40.3 40.4]
+ [50.1 50.2 50.3 50.4]]
 ```
 で格納されるが，これをpythonから見たい，操作したいとすると，
 ```python
 import numpy as np
 from scipy.io import FortranFile
-row = 4,
-col = 3
-a = f.read_record('i4').reshape(col,row,order='F')
+
+f = FortranFile('t.dac')
+
+row_col = f.read_record('i4')
+row = row_col[0]
+col = row_col[1]
+a = f.read_record('f8').reshape(row,col,order='F')
 a = np.array(a)
 print(a)
-```
-とすれば，`a`はnumpy.arrayとして使用ができる．
 
-fortran側で，DOUBLE PRECISIONを使用した場合は，`i4`の部分を`f8`に置き換えれば良い．
+row_col = f.read_record('i4')
+row = row_col[0]
+col = row_col[1]
+x = f.read_record('f8').reshape(row,col,order='F')
+x = np.array(x)
+print(x)
+
+
+
+```
+とすればよい．
+
+FORTRANで`DOUBLE PRECISION`でなく，`INTEGER`を使用した場合は`f8`を`i4`に変えれば良い．
+
 
