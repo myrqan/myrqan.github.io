@@ -46,9 +46,14 @@ $ ls | wc -l
 ```
 となる．
 
-## pngを統合してgifを作る
+## pngを統合して動画ファイルにする
 
 ```zsh
 $ magick $(ls *.png | sort -V) out.gif
 ```
 出力ファイルは`out.gif`になる．
+
+```zsh
+ffmpeg -framerate 10 -pattern_type glob -i "*.png" -c:v libx264 -pix_fmt yuv420p output.mp4
+```
+出力ファイルは`output.mp4`になる．
