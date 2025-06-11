@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>fort.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/*
+
+School Book style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 15px 0.5em 0.5em 30px;
+  font-size: 11px;
+  line-height:16px;
+  background:#f6f6ae url(./school-book.png);
+  border-top: solid 2px #d2e8b9;
+  border-bottom: solid 1px #d2e8b9;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color:#005599;
+  font-weight:bold;
+}
+
+.hljs,
+.hljs-subst {
+  color: #3e5915;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-link {
+  color: #2c009f;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #e60415;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-name,
+.hljs-selector-id,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+
+<!--ここから追記1.（数式に対応）-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax:{
+      inlineMath: [['$', '$']],
+      displayMath: [['$$', '$$'], ["\\[", "//]]"] ]
+    },
+    messageStyle: "none"
+    });
+</script>
+<!--ここまで追記1.-->
+
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="fortran%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AEtips">Fortranについてのtips</h1>
+<ul>
+<li><a href="#fortran%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AEtips">Fortranについてのtips</a>
+<ul>
+<li><a href="#fortran%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95">fortranで計算のデータを書き出す方法</a>
+<ul>
+<li><a href="#%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%81%A7%E3%81%AE%E5%87%BA%E5%8A%9B">バイナリでの出力</a>
+<ul>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">二次元配列について</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="fortran%E3%81%A7%E8%A8%88%E7%AE%97%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E6%9B%B8%E3%81%8D%E5%87%BA%E3%81%99%E6%96%B9%E6%B3%95">fortranで計算のデータを書き出す方法</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">!== for data output</span>
+foutdat= <span class="hljs-string">'(1x, e13.5e3, ",", 1x, e13.5e3)'</span>
+foutmsg= <span class="hljs-string">'(1x, "write ", "step=", i8, " t=", e10.3, " nd=", i3)'</span>
+fstopmsg= <span class="hljs-string">'(1x, "stop  ", "step=", i8, " t=", e10.3)'</span>
+</div></code></pre>
+<p><code>foutdat</code>でデータの出力の書式を設定．<br>
+<code>foutmsg</code>，<code>fstopmsg</code>はターミナル出力用．<br>
+数字は右つめで出力される</p>
+<ul>
+<li><code>1x</code>は1個の空白：<code>3x</code>では3個の空白になる</li>
+<li><code>e13.5e3</code>は指数表記，幅13桁，小数点以下5桁，指数部3桁
+<ul>
+<li>最後の<code>e3</code>の部分は省略可能（省略すると指数部は2桁になる）</li>
+<li><code>e</code>の代わりに<code>f</code>を使うと指数表記ではない実数になる．例：<code>168.87512</code></li>
+</ul>
+</li>
+<li><code>i8</code>は整数を8桁で出力</li>
+<li><code>i3.3</code>とすると，整数をゼロ埋めした3桁になる．例：<code>001</code>, <code>100</code></li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-built_in">write</span>(fname, <span class="hljs-string">'("data/mac", i3.3, ".dat")'</span>) nd
+mfile = <span class="hljs-number">10</span>
+open(mfile, <span class="hljs-keyword">file</span>=fname, <span class="hljs-keyword">form</span>=<span class="hljs-string">'formatted'</span>)
+
+<span class="hljs-built_in">write</span>(mfile, foutdat) x, y
+<span class="hljs-built_in">write</span>(*, foutmsg) ns, t, nd
+<span class="hljs-built_in">write</span>(*, fstopmsg) ns, t, nd
+
+close(mfile)
+</div></code></pre>
+<ul>
+<li>変数<code>fname</code>に<code>data/mac[nd].dat</code>を代入．<code>nd</code>は3桁0埋めの整数が入る．例えば，<code>data/mac001.dat</code>など．</li>
+<li><code>mfile</code>に装置番号（1〜99）を代入．（5：標準入力，6：標準出力らしい）</li>
+<li>あとは<code>write</code>で書き出せば良い．装置番号<code>mfile</code>を指定することで<code>fname</code>に書き出すことができる．</li>
+<li>開いたファイルは<code>close(mfile)</code>で閉じる．</li>
+</ul>
+<h3 id="%E3%83%90%E3%82%A4%E3%83%8A%E3%83%AA%E3%81%A7%E3%81%AE%E5%87%BA%E5%8A%9B">バイナリでの出力</h3>
+<p>たとえば，</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">program</span></span> main
+<span class="hljs-keyword">implicit</span> <span class="hljs-keyword">none</span>
+<span class="hljs-keyword">integer</span> :: idf
+idf = <span class="hljs-number">6</span>
+open(idf,<span class="hljs-keyword">file</span>=<span class="hljs-string">'t.dac'</span>,<span class="hljs-keyword">form</span>=<span class="hljs-string">'unformatted'</span>)
+<span class="hljs-built_in">write</span>(idf) <span class="hljs-number">1</span>
+<span class="hljs-keyword">end</span>
+</div></code></pre>
+<p>などとして<code>t.dac</code>にその結果を書き込むとすると，<code>form=unformatted</code>の場合は，</p>
+<pre class="hljs"><code><div>00000000: 0400 0000 0100 0000 0400 0000 
+</div></code></pre>
+<p>としてかき込まれ，（たとえば，vimでバイナリファイルを見るには<code>vim -b t.dac</code>で開き，vim内で<code>:%!xxd</code>とすればよい.）これは<code>4 1 4</code>と書かれていることに相当する．<code>unformatted</code>の場合は，最初と最後にrecord markerとして4 byte分が使用されており，実際の数値はその間に書かれている．この場合は<code>1</code>が書き込まれていることがわかる．</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">write</span>(idf) <span class="hljs-number">1.d0</span>
+</div></code></pre>
+<p>とすると，出力は</p>
+<pre class="hljs"><code><div>0800 0000 0000 0000 0000 f03f 0800 0000
+</div></code></pre>
+<p>となり，これを解釈すると，</p>
+<pre class="hljs"><code><div>0800 0000 | 0000 0000 0000 f03f | 0800 0000
+→ 8 1.0 8
+</div></code></pre>
+<p>ということになる．（この場合は，中身がdouble precisionということがわかっていないといけない．）</p>
+<h4 id="%E4%BA%8C%E6%AC%A1%E5%85%83%E9%85%8D%E5%88%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">二次元配列について</h4>
+<p>例えばfortranで</p>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">INTEGER</span>,<span class="hljs-keyword">PARAMETER</span>::xix=<span class="hljs-number">5</span>,xjx=<span class="hljs-number">4</span>
+  <span class="hljs-keyword">DOUBLE</span> <span class="hljs-keyword">PRECISION</span> :: x(xix,xjx)
+  <span class="hljs-keyword">INTEGER</span>,<span class="hljs-keyword">PARAMETER</span>::aix=<span class="hljs-number">4</span>,ajx=<span class="hljs-number">3</span>
+  <span class="hljs-keyword">DOUBLE</span> <span class="hljs-keyword">PRECISION</span> :: a(aix,ajx)
+  <span class="hljs-keyword">INTEGER</span>::mid
+  <span class="hljs-keyword">INTEGER</span> :: i, j
+
+  <span class="hljs-keyword">do</span> j = <span class="hljs-number">1</span>, xjx
+  <span class="hljs-keyword">do</span> i = <span class="hljs-number">1</span>, xix
+    x(i,j) = i*<span class="hljs-number">1.0d1</span> + j*<span class="hljs-number">0.1d0</span>
+  <span class="hljs-keyword">enddo</span>
+  <span class="hljs-keyword">enddo</span>
+  <span class="hljs-keyword">do</span> j = <span class="hljs-number">1</span>, ajx
+  <span class="hljs-keyword">do</span> i = <span class="hljs-number">1</span>, aix
+    a(i,j) = i*<span class="hljs-number">1.0d0</span> + j*<span class="hljs-number">0.1d0</span>
+  <span class="hljs-keyword">enddo</span>
+  <span class="hljs-keyword">enddo</span>
+
+  mid = <span class="hljs-number">10</span>
+  open(mid, <span class="hljs-keyword">file</span>=<span class="hljs-string">'t.dac'</span>, <span class="hljs-keyword">form</span>=<span class="hljs-string">'unformatted'</span>)
+  <span class="hljs-built_in">write</span>(mid) aix,ajx
+  <span class="hljs-built_in">write</span>(mid) a
+  <span class="hljs-built_in">write</span>(mid) xix,xjx
+  <span class="hljs-built_in">write</span>(mid) x
+
+
+</div></code></pre>
+<p>としたとき，4行3列の配列<code>A</code>と5行4列の配列<code>X</code>は</p>
+<pre class="hljs"><code><div>A = 
+[[1.1 1.2 1.3]
+ [2.1 2.2 2.3]
+ [3.1 3.2 3.3]
+ [4.1 4.2 4.3]]
+
+X =
+[[10.1 10.2 10.3 10.4]
+ [20.1 20.2 20.3 20.4]
+ [30.1 30.2 30.3 30.4]
+ [40.1 40.2 40.3 40.4]
+ [50.1 50.2 50.3 50.4]]
+</div></code></pre>
+<p>で格納されるが，これをpythonから見たい，操作したいとすると，</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> scipy.io <span class="hljs-keyword">import</span> FortranFile
+
+f = FortranFile(<span class="hljs-string">'t.dac'</span>)
+
+row_col = f.read_record(<span class="hljs-string">'i4'</span>)
+row = row_col[<span class="hljs-number">0</span>]
+col = row_col[<span class="hljs-number">1</span>]
+a = f.read_record(<span class="hljs-string">'f8'</span>).reshape(row,col,order=<span class="hljs-string">'F'</span>)
+a = np.array(a)
+print(a)
+
+row_col = f.read_record(<span class="hljs-string">'i4'</span>)
+row = row_col[<span class="hljs-number">0</span>]
+col = row_col[<span class="hljs-number">1</span>]
+x = f.read_record(<span class="hljs-string">'f8'</span>).reshape(row,col,order=<span class="hljs-string">'F'</span>)
+x = np.array(x)
+print(x)
+
+
+
+</div></code></pre>
+<p>とすればよい．</p>
+<p>FORTRANで<code>DOUBLE PRECISION</code>でなく，<code>INTEGER</code>を使用した場合は<code>f8</code>を<code>i4</code>に変えれば良い．</p>
+
+</body>
+</html>

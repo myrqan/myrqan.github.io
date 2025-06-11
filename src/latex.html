@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>latex.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/*
+
+School Book style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 15px 0.5em 0.5em 30px;
+  font-size: 11px;
+  line-height:16px;
+  background:#f6f6ae url(./school-book.png);
+  border-top: solid 2px #d2e8b9;
+  border-bottom: solid 1px #d2e8b9;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color:#005599;
+  font-weight:bold;
+}
+
+.hljs,
+.hljs-subst {
+  color: #3e5915;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attribute,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-link {
+  color: #2c009f;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  color: #e60415;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-name,
+.hljs-selector-id,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+
+<!--ここから追記1.（数式に対応）-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax:{
+      inlineMath: [['$', '$']],
+      displayMath: [['$$', '$$'], ["\\[", "//]]"] ]
+    },
+    messageStyle: "none"
+    });
+</script>
+<!--ここまで追記1.-->
+
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="latex%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">LaTeXについて</h1>
+<ul>
+<li><a href="#latex%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">LaTeXについて</a>
+<ul>
+<li><a href="#%E5%85%A8%E8%88%AC%E7%9A%84%E3%81%AA%E8%A9%B1">全般的な話</a></li>
+<li><a href="#%E3%82%88%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%86%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">よくつかうパッケージ</a>
+<ul>
+<li><a href="#%E3%81%AA%E3%82%93%E3%81%8B%E3%81%AE%E6%A9%9F%E4%BC%9A%E3%81%AB%E4%BD%BF%E3%81%88%E3%81%9D%E3%81%86%E3%81%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">なんかの機会に使えそうなパッケージ</a></li>
+</ul>
+</li>
+<li><a href="#latex%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">LaTeXで使えるフォントを確認する方法</a></li>
+<li><a href="#%E5%B0%8F%E3%83%8D%E3%82%BF">小ネタ</a></li>
+<li><a href="#%E5%9B%B0%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8">困ったこと</a></li>
+<li><a href="#to-do">TO DO</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="%E5%85%A8%E8%88%AC%E7%9A%84%E3%81%AA%E8%A9%B1">全般的な話</h2>
+<ul>
+<li>プリアンブルはテンプレートを作り，それを参照するようにしたほうがいい．<br>
+例えば，<code>\documentclass[a4paper]{ltjsarticle}</code>や<code>\usepackage{amsmath, amssymb}</code>のような，いつも使うパッケージや，<code>\renewcommand</code>などで自分で定義したコマンドなどをまとめて置いておくと良い．<br>
+文書によって設定を変えたいものがある場合は，snippetとして定義して本文ファイル中で呼び出すようにしておくと良い．<br>
+自分はneovimでsnippetを管理している．
+<ul>
+<li><code>\input{path_to_preamble}</code>で<code>path_to_preamble</code>にあるファイルを読み込むことができる．このとき，相対パスでも絶対パスでも良い．<br>
+（プリアンブルの場所を変えることは（ほとんど）ないので，私は絶対パスで指定をしている．）</li>
+</ul>
+</li>
+</ul>
+<h2 id="%E3%82%88%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%86%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">よくつかうパッケージ</h2>
+<p>よく使うパッケージとその内容を以下に列挙する． いずれも<code>\usepackage{name_of_package}</code>で利用可能． 気になるパッケージがあればターミナルなどで<code>$ texdoc name_of_package</code>とすれば解説のpdf文章が出てくる．（<a href="https://ctan.org">CTAN</a>でも検索することができる．）</p>
+<ul>
+<li>amsmath, amssymb, amsthm （文章中に使う環境，記号の導入）</li>
+<li>ascmac（boxnote, itembox, mask, screen, shadeboxとか）</li>
+<li>comment（文章のある部分をまとめてコメントアウトする）</li>
+<li>enumitem（箇条書き）</li>
+<li>fancyhdr（ヘッダーとかフッターを記述するため）</li>
+<li>here（図表をこの場所！って思う場所に配置する）</li>
+<li>siunitx（単位のついた数字とかを簡単に書く）</li>
+<li>physics2（各種，数式の表記を簡略化してくれる）
+<ul>
+<li>physicsパッケージはsiunitxとの衝突のため，<u><strong>非推奨</strong></u>． 詳しくはパッケージの文章を読んでください．<br>
+physics2では以下（など）のモジュールを利用することで，表記の簡略化ができる．
+<ul>
+<li>ab, bracket, diagmat, doubleprod, xmat<br>
+それぞれのモジュールは\usephysicsmodule{name_of_module}で利用可能になる．</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>diffcoeff（微分のコマンドを提供, physics2には付属していない）</li>
+</ul>
+<h3 id="%E3%81%AA%E3%82%93%E3%81%8B%E3%81%AE%E6%A9%9F%E4%BC%9A%E3%81%AB%E4%BD%BF%E3%81%88%E3%81%9D%E3%81%86%E3%81%AA%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8">なんかの機会に使えそうなパッケージ</h3>
+<ul>
+<li><code>circledsteps</code>: 丸囲みの文字とか</li>
+<li><code>esvect</code>: 文字の上に矢印を書くタイプのベクトルの表記で役にたつ</li>
+</ul>
+<h2 id="latex%E3%81%A7%E4%BD%BF%E3%81%88%E3%82%8B%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">LaTeXで使えるフォントを確認する方法</h2>
+<ol>
+<li>ターミナルで<code>$ sudo mktexlsr</code>とする．権限を求められるのでパスワードを入力する．</li>
+<li><code>$ luaotfload-tool --update</code></li>
+<li><code>$ luaotfload-tool --list= &gt; fontslist.txt</code><br>
+これで使用できるフォントがカレントディレクトリの<code>fontslist.txt</code>に一覧として入っている．</li>
+</ol>
+<p>数式で使いたいフォントを検索するときは<code>$ luafindfont math &gt; mathfonts.txt</code>などとして見ることができる．</p>
+<h2 id="%E5%B0%8F%E3%83%8D%E3%82%BF">小ネタ</h2>
+<ul>
+<li><code>\raisebox{height}{hoge}</code>で文字<code>hoge</code>を<code>height</code>だけあげることができる．<br>
+基本はこの使いかたで十分</li>
+</ul>
+<h2 id="%E5%9B%B0%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8">困ったこと</h2>
+<ul>
+<li><code>wrapstuff</code>と<code>footnote</code>の相性が悪い？</li>
+</ul>
+<h2 id="to-do">TO DO</h2>
+<ul>
+<li>preambleの共通化をちゃんとする</li>
+</ul>
+
+</body>
+</html>

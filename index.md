@@ -13,13 +13,13 @@
 ## 各種備忘録的な何か
 必要になったらまとめる（基本的にはプログラム関係のことが多いかも） 
 大したことは書いていないかもしれない．
-- [LaTeXについて](src/latex.md)
+- [LaTeXについて](src/latex.html)
     - 雛形は[github](https://github.com/crutont0121/LaTeX_open/tree/main/prb)にまとめて置いてある．
-- [gnuplotの操作について](src/gnuplot.md)
+- [gnuplotの操作について](src/gnuplot.html)
     - 雛形を置いてある
-- [fortranについて](src/fort.md)
+- [fortranについて](src/fort.html)
     - 計算結果を外部ファイルに保存
-- [小ネタ集め](src/tips.md)
+- [小ネタ集め](src/tips.html)
     - 態態一記事にするまでもないことをまとめる
 
 neovimのプラグインは今のところ，[lazy.nvim](https://lazy.folke.io)と[mason.nvim](https://github.com/williamboman/mason.nvim)を使って管理しています．
