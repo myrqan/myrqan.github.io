@@ -1,432 +1,321 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<title>tips.md</title>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-
-<style>
-/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
-body {
-	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
-	font-size: var(--vscode-markdown-font-size, 14px);
-	padding: 0 26px;
-	line-height: var(--vscode-markdown-line-height, 22px);
-	word-wrap: break-word;
-}
-
-#code-csp-warning {
-	position: fixed;
-	top: 0;
-	right: 0;
-	color: white;
-	margin: 16px;
-	text-align: center;
-	font-size: 12px;
-	font-family: sans-serif;
-	background-color:#444444;
-	cursor: pointer;
-	padding: 6px;
-	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
-}
-
-#code-csp-warning:hover {
-	text-decoration: none;
-	background-color:#007acc;
-	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
-}
-
-body.scrollBeyondLastLine {
-	margin-bottom: calc(100vh - 22px);
-}
-
-body.showEditorSelection .code-line {
-	position: relative;
-}
-
-body.showEditorSelection .code-active-line:before,
-body.showEditorSelection .code-line:hover:before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	left: -12px;
-	height: 100%;
-}
-
-body.showEditorSelection li.code-active-line:before,
-body.showEditorSelection li.code-line:hover:before {
-	left: -30px;
-}
-
-.vscode-light.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.15);
-}
-
-.vscode-light.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(0, 0, 0, 0.40);
-}
-
-.vscode-light.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-.vscode-dark.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.4);
-}
-
-.vscode-dark.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 255, 255, 0.60);
-}
-
-.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-.vscode-high-contrast.showEditorSelection .code-active-line:before {
-	border-left: 3px solid rgba(255, 160, 0, 0.7);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line:hover:before {
-	border-left: 3px solid rgba(255, 160, 0, 1);
-}
-
-.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
-	border-left: none;
-}
-
-img {
-	max-width: 100%;
-	max-height: 100%;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
-	outline: 1px solid -webkit-focus-ring-color;
-	outline-offset: -1px;
-}
-
-hr {
-	border: 0;
-	height: 2px;
-	border-bottom: 2px solid;
-}
-
-h1 {
-	padding-bottom: 0.3em;
-	line-height: 1.2;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
-
-h1, h2, h3 {
-	font-weight: normal;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-table > thead > tr > th {
-	text-align: left;
-	border-bottom: 1px solid;
-}
-
-table > thead > tr > th,
-table > thead > tr > td,
-table > tbody > tr > th,
-table > tbody > tr > td {
-	padding: 5px 10px;
-}
-
-table > tbody > tr + tr > td {
-	border-top: 1px solid;
-}
-
-blockquote {
-	margin: 0 7px 0 5px;
-	padding: 0 16px 0 10px;
-	border-left-width: 5px;
-	border-left-style: solid;
-}
-
-code {
-	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
-	font-size: 1em;
-	line-height: 1.357em;
-}
-
-body.wordWrap pre {
-	white-space: pre-wrap;
-}
-
-pre:not(.hljs),
-pre.hljs code > div {
-	padding: 16px;
-	border-radius: 3px;
-	overflow: auto;
-}
-
-pre code {
-	color: var(--vscode-editor-foreground);
-	tab-size: 4;
-}
-
-/** Theming */
-
-.vscode-light pre {
-	background-color: rgba(220, 220, 220, 0.4);
-}
-
-.vscode-dark pre {
-	background-color: rgba(10, 10, 10, 0.4);
-}
-
-.vscode-high-contrast pre {
-	background-color: rgb(0, 0, 0);
-}
-
-.vscode-high-contrast h1 {
-	border-color: rgb(0, 0, 0);
-}
-
-.vscode-light table > thead > tr > th {
-	border-color: rgba(0, 0, 0, 0.69);
-}
-
-.vscode-dark table > thead > tr > th {
-	border-color: rgba(255, 255, 255, 0.69);
-}
-
-.vscode-light h1,
-.vscode-light hr,
-.vscode-light table > tbody > tr + tr > td {
-	border-color: rgba(0, 0, 0, 0.18);
-}
-
-.vscode-dark h1,
-.vscode-dark hr,
-.vscode-dark table > tbody > tr + tr > td {
-	border-color: rgba(255, 255, 255, 0.18);
-}
-
-</style>
-
-<style>
-/*
-
-School Book style from goldblog.com.ua (c) Zaripov Yura <yur4ik7@ukr.net>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 15px 0.5em 0.5em 30px;
-  font-size: 11px;
-  line-height:16px;
-  background:#f6f6ae url(./school-book.png);
-  border-top: solid 2px #d2e8b9;
-  border-bottom: solid 1px #d2e8b9;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal {
-  color:#005599;
-  font-weight:bold;
-}
-
-.hljs,
-.hljs-subst {
-  color: #3e5915;
-}
-
-.hljs-string,
-.hljs-title,
-.hljs-section,
-.hljs-type,
-.hljs-symbol,
-.hljs-bullet,
-.hljs-attribute,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-addition,
-.hljs-variable,
-.hljs-template-tag,
-.hljs-template-variable,
-.hljs-link {
-  color: #2c009f;
-}
-
-.hljs-comment,
-.hljs-quote,
-.hljs-deletion,
-.hljs-meta {
-  color: #e60415;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-doctag,
-.hljs-title,
-.hljs-section,
-.hljs-type,
-.hljs-name,
-.hljs-selector-id,
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-</style>
-
-<style>
-/*
- * Markdown PDF CSS
- */
-
- body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
-	padding: 0 12px;
-}
-
-pre {
-	background-color: #f8f8f8;
-	border: 1px solid #cccccc;
-	border-radius: 3px;
-	overflow-x: auto;
-	white-space: pre-wrap;
-	overflow-wrap: break-word;
-}
-
-pre:not(.hljs) {
-	padding: 23px;
-	line-height: 19px;
-}
-
-blockquote {
-	background: rgba(127, 127, 127, 0.1);
-	border-color: rgba(0, 122, 204, 0.5);
-}
-
-.emoji {
-	height: 1.4em;
-}
-
-code {
-	font-size: 14px;
-	line-height: 19px;
-}
-
-/* for inline code */
-:not(pre):not(.hljs) > code {
-	color: #C9AE75; /* Change the old color so it seems less like an error */
-	font-size: inherit;
-}
-
-/* Page Break : use <div class="page"/> to insert page break
--------------------------------------------------------- */
-.page {
-	page-break-after: always;
-}
-
-</style>
-
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
-
-<!--ここから追記1.（数式に対応）-->
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    tex2jax:{
-      inlineMath: [['$', '$']],
-      displayMath: [['$$', '$$'], ["\\[", "//]]"] ]
-    },
-    messageStyle: "none"
-    });
-</script>
-<!--ここまで追記1.-->
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <title>小ネタ集</title>
+    <style type="text/css">
+        /* 全体設定 */
+        body {
+            font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, sans-serif;
+            font-size: 14px;
+            color: #333;
+            background: #f0f8ff; /* 淡い青の背景 */
+            margin: 0;
+            padding: 20px;
+            opacity: 0; /* 初期状態を透明に */
+            transition: opacity 1s ease-in-out; /* フェードインアニメーション */
+        }
+
+        body.loaded {
+            opacity: 1; /* 読み込み完了後に表示 */
+        }
+
+        /* コンテンツを囲むメインのボックス */
+        #container {
+            width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #c0d9ed; /* 少し濃い青系のボーダー */
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+        }
+
+        /* ヘッダー部分 */
+        #header {
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: #2e6496; /* 落ち着いた青 */
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            margin: 0;
+        }
+
+        /* Twitterリンク */
+        .twitter-link {
+            text-align: right;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .twitter-link a {
+            color: #1da1f2; /* Twitterブランドカラー */
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .twitter-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ナビゲーション */
+        #nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: center;
+        }
+        #nav ul li {
+            display: inline-block;
+            margin: 0 12px;
+        }
+        #nav ul li a {
+            color: #555;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 7px 14px;
+            border: 1px solid #d0d0d0;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background: #fcfcfc;
+            background: -webkit-linear-gradient(top, #fcfcfc, #ececec);
+            background: linear-gradient(to bottom, #fcfcfc, #ececec);
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            display: inline-block; /* transform用 */
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        }
+        #nav ul li a:hover {
+            background: #e9e9e9;
+            background: -webkit-linear-gradient(top, #e9e9e9, #fcfcfc);
+            background: linear-gradient(to bottom, #e9e9e9, #fcfcfc);
+            -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            color: #000;
+            -webkit-transform: translateY(-2px); /* 少し上に移動 */
+            -moz-transform: translateY(-2px);
+            transform: translateY(-2px);
+        }
+
+        /* セクション見出し */
+        h2 {
+            font-size: 1.6em;
+            color: #3b73a6;
+            border-bottom: 1px dotted #b0b0b0;
+            padding-bottom: 5px;
+            margin-top: 35px;
+            margin-bottom: 18px;
+        }
+
+        /* リンク */
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* リスト */
+        ul {
+            list-style: disc;
+            margin-left: 25px;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+        ul ul {
+            list-style: circle;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        li {
+            margin-bottom: 7px;
+        }
+
+        /* 水平線 */
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+            background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+            background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+            background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
+            margin: 25px 0;
+        }
+
+        /* フッター */
+        #footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        /* キリ番カウンター */
+        #counter-area {
+            text-align: center;
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px dashed #cccccc;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        /* 現在時刻表示 */
+        #current-time {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 15px;
+        }
+
+        /* コードブロック */
+        pre {
+            background-color: #eef;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        code {
+            font-family: "Consolas", "Monaco", "Courier New", monospace;
+            font-size: 0.9em;
+            color: #333;
+        }
+    </style>
+    <script type="text/javascript">
+        // ページ読み込み時のフェードイン
+        window.onload = function() {
+            document.body.classList.add('loaded');
+            updateCurrentTime(); // 時刻表示を更新
+            setInterval(updateCurrentTime, 1000); // 1秒ごとに時刻を更新
+        };
+
+        // キリ番（簡易的なローカルストレージ使用）
+        function initializeCounter() {
+            let count = localStorage.getItem('pageViewCount');
+            if (count === null) {
+                count = 0;
+            } else {
+                count = parseInt(count);
+            }
+            count++;
+            localStorage.setItem('pageViewCount', count);
+            document.getElementById('page-view-count').textContent = count;
+        }
+
+        // 現在時刻の更新
+        function updateCurrentTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time-display').textContent = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
+        }
+
+        // ページ読み込み時にカウンターと時刻を初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCounter();
+            updateCurrentTime(); // 初回の時刻表示
+            setInterval(updateCurrentTime, 1000); // 1秒ごとに更新
+        });
+    </script>
 </head>
 <body>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
-          ? 'dark'
-          : 'default'
-    });
-  </script>
-<h1 id="%E5%B0%8F%E3%83%8D%E3%82%BF%E9%9B%86">小ネタ集</h1>
-<p>実行環境は <code>zsh 5.9 (arm-apple-darwin24.0.0)</code></p>
-<ul>
-<li><a href="#%E5%B0%8F%E3%83%8D%E3%82%BF%E9%9B%86">小ネタ集</a>
-<ul>
-<li><a href="#factor%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89--prime%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89"><code>factor</code>コマンド / <code>prime</code>コマンド</a></li>
-<li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E4%B8%AD%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E6%95%B0">ディレクトリ中のファイル・フォルダの数</a></li>
-<li><a href="#png%E3%82%92%E7%B5%B1%E5%90%88%E3%81%97%E3%81%A6gif%E3%82%92%E4%BD%9C%E3%82%8B">pngを統合してgifを作る</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="factor%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89--prime%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89"><code>factor</code>コマンド / <code>prime</code>コマンド</h2>
-<ul>
-<li><code>factor</code>: 入力した数を因数分解する．オプションとして<code>-h</code>，<code>--exponents</code>で指数表記にできる．</li>
-<li><code>prime</code>: 入力した数が素数か判定する．</li>
-</ul>
-<pre class="hljs"><code><div><span class="hljs-meta">$</span><span class="bash"> factor 100</span>
+    <div id="container">
+        <div id="header">
+            <h1>小ネタ集</h1>
+            <p>実行環境は <code>zsh 5.9 (arm-apple-darwin24.0.0)</code></p>
+        </div>
+
+        <div id="nav">
+            <ul>
+                <li><a href="#factorコマンド--primeコマンド"><code>factor</code>コマンド / <code>prime</code>コマンド</a></li>
+                <li><a href="#ディレクトリ中のファイルフォルダの数">ディレクトリ中のファイル・フォルダの数</a></li>
+                <li><a href="#pngを統合してgifを作る">pngを統合して動画ファイルにする</a></li>
+            </ul>
+        </div>
+
+        <hr />
+
+        <div id="content">
+            <h2 id="factorコマンド--primeコマンド"><code>factor</code>コマンド / <code>prime</code>コマンド</h2>
+            <ul>
+                <li><code>factor</code>: 入力した数を因数分解します。オプションとして<code>-h</code>, <code>--exponents</code>で指数表記にできます。</li>
+                <li><code>prime</code>: 入力した数が素数か判定します。</li>
+            </ul>
+            <pre><code>$ factor 100
 100: 2 2 5 5
-<span class="hljs-meta">
-$</span><span class="bash"> factor -h 100</span>
+
+$ factor -h 100
 100: 2^2 5^2
-<span class="hljs-meta">
-$</span><span class="bash"> factor -h 65537</span>
+
+$ factor -h 65537
 65537: 65537
-<span class="hljs-meta">
-$</span><span class="bash"> openssl prime 918247</span>
+
+$ openssl prime 918247
 E02E7 (918247) is not prime
-<span class="hljs-meta">
-$</span><span class="bash"> openssl prime 100003</span>
+
+$ openssl prime 100003
 186A3 (100003) is prime
-<span class="hljs-meta">
-$</span><span class="bash"> <span class="hljs-built_in">echo</span> -n <span class="hljs-string">"number: "</span>; <span class="hljs-built_in">read</span> num; [ <span class="hljs-string">"<span class="hljs-variable">$num</span>"</span> -eq 1 ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">"is NOT prime"</span> || ([ $(factor <span class="hljs-string">"<span class="hljs-variable">$num</span>"</span> | wc -w) -gt 2 ] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">"is NOT prime"</span> || <span class="hljs-built_in">echo</span> <span class="hljs-string">"is prime"</span>)</span>
+
+$ echo -n "number: "; read num; [ "$num" -eq 1 ] && echo "is NOT prime" || ([ $(factor "$num" | wc -w) -gt 2 ] && echo "is NOT prime" || echo "is prime")
 number: 100000000000031
 is prime
-</div></code></pre>
-<h2 id="%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E4%B8%AD%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%BB%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E3%81%AE%E6%95%B0">ディレクトリ中のファイル・フォルダの数</h2>
-<p>例えば，</p>
-<pre class="hljs"><code><div>$ touch test_{001..050}.txt
-</div></code></pre>
-<p>で50個の連番ファイル（<code>test_001.txt</code>から<code>test_050.txt</code>）を作ったとすると</p>
-<pre class="hljs"><code><div><span class="hljs-meta">$</span><span class="bash"> ls | wc -l</span>
-50
-</div></code></pre>
-<p>となる．</p>
-<h2 id="png%E3%82%92%E7%B5%B1%E5%90%88%E3%81%97%E3%81%A6%E5%8B%95%E7%94%BB%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E3%81%99%E3%82%8B">pngを統合して動画ファイルにする</h2>
-<pre class="hljs"><code><div>$ magick $(ls *.png | sort -V) out.gif
-</div></code></pre>
-<p>出力ファイルは<code>out.gif</code>になる．</p>
-<pre class="hljs"><code><div>ffmpeg -framerate 10 -pattern_type glob -i <span class="hljs-string">"*.png"</span> -c:v libx264 -pix_fmt yuv420p output.mp4
-</div></code></pre>
-<p>出力ファイルは<code>output.mp4</code>になる．</p>
+</code></pre>
 
+            <h2 id="ディレクトリ中のファイルフォルダの数">ディレクトリ中のファイル・フォルダの数</h2>
+            <p>例えば、</p>
+            <pre><code>$ touch test_{001..050}.txt
+</code></pre>
+            <p>で50個の連番ファイル（<code>test_001.txt</code>から<code>test_050.txt</code>）を作ったとすると</p>
+            <pre><code>$ ls | wc -l
+50
+</code></pre>
+            <p>となります。</p>
+
+            <h2 id="pngを統合してgifを作る">pngを統合して動画ファイルにする</h2>
+            <pre><code>$ magick $(ls *.png | sort -V) out.gif
+</code></pre>
+            <p>出力ファイルは<code>out.gif</code>になります。</p>
+            <pre><code>ffmpeg -framerate 10 -pattern_type glob -i "*.png" -c:v libx264 -pix_fmt yuv420p output.mp4
+</code></pre>
+            <p>出力ファイルは<code>output.mp4</code>になります。</p>
+        </div>
+
+        <div id="current-time">
+            現在時刻: <span id="time-display"></span>
+        </div>
+
+        <div id="footer">
+            <p>&copy; 2025 myrqan</p>
+        </div>
+    </div>
 </body>
 </html>
