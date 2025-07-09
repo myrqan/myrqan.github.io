@@ -1,218 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
     <title>HOME</title>
-    <style type="text/css">
-        /* 全体設定 */
-        body {
-            font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, sans-serif;
-            font-size: 14px;
-            color: #333;
-            background: #f0f8ff; /* 淡い青の背景 */
-            margin: 0;
-            padding: 20px;
-            opacity: 0; /* 初期状態を透明に */
-            transition: opacity 1s ease-in-out; /* フェードインアニメーション */
-        }
-
-        body.loaded {
-            opacity: 1; /* 読み込み完了後に表示 */
-        }
-
-        /* コンテンツを囲むメインのボックス */
-        #container {
-            width: 800px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border: 1px solid #c0d9ed; /* 少し濃い青系のボーダー */
-            -webkit-border-radius: 8px;
-            -moz-border-radius: 8px;
-            border-radius: 8px;
-            -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-        }
-
-        /* ヘッダー部分 */
-        #header {
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        h1 {
-            font-size: 2.2em;
-            color: #2e6496; /* 落ち着いた青 */
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-            margin: 0;
-        }
-
-        /* Twitterリンク */
-        .twitter-link {
-            text-align: right;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-        .twitter-link a {
-            color: #1da1f2; /* Twitterブランドカラー */
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .twitter-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* ナビゲーション */
-        #nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            text-align: center;
-        }
-        #nav ul li {
-            display: inline-block;
-            margin: 0 12px;
-        }
-        #nav ul li a {
-            color: #555;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 7px 14px;
-            border: 1px solid #d0d0d0;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            background: #fcfcfc;
-            background: -webkit-linear-gradient(top, #fcfcfc, #ececec);
-            background: linear-gradient(to bottom, #fcfcfc, #ececec);
-            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            display: inline-block; /* transform用 */
-            -webkit-transition: all 0.2s ease-in-out;
-            -moz-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-        #nav ul li a:hover {
-            background: #e9e9e9;
-            background: -webkit-linear-gradient(top, #e9e9e9, #fcfcfc);
-            background: linear-gradient(to bottom, #e9e9e9, #fcfcfc);
-            -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            color: #000;
-            -webkit-transform: translateY(-2px); /* 少し上に移動 */
-            -moz-transform: translateY(-2px);
-            transform: translateY(-2px);
-        }
-
-        /* セクション見出し */
-        h2 {
-            font-size: 1.6em;
-            color: #3b73a6;
-            border-bottom: 1px dotted #b0b0b0;
-            padding-bottom: 5px;
-            margin-top: 35px;
-            margin-bottom: 18px;
-        }
-
-        /* リンク */
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-
-        /* リスト */
-        ul {
-            list-style: disc;
-            margin-left: 25px;
-            padding: 0;
-            margin-bottom: 15px;
-        }
-        ul ul {
-            list-style: circle;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        li {
-            margin-bottom: 7px;
-        }
-
-        /* 水平線 */
-        hr {
-            border: 0;
-            height: 1px;
-            background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            margin: 25px 0;
-        }
-
-        /* フッター */
-        #footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-            font-size: 0.8em;
-            color: #888;
-        }
-
-        /* キリ番カウンター */
-        #counter-area {
-            text-align: center;
-            font-size: 1.1em;
-            color: #555;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px dashed #cccccc;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-        }
-
-        /* 現在時刻表示 */
-        #current-time {
-            text-align: center;
-            font-size: 0.9em;
-            color: #777;
-            margin-top: 15px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script type="text/javascript">
-        // ページ読み込み時のフェードイン
+        // fadein 
         window.onload = function() {
             document.body.classList.add('loaded');
-            updateCurrentTime(); // 時刻表示を更新
-            setInterval(updateCurrentTime, 1000); // 1秒ごとに時刻を更新
+            updateCurrentTime(); // update
+            setInterval(updateCurrentTime, 1000); // 
         };
 
-        // キリ番（簡易的なローカルストレージ使用）
-        function initializeCounter() {
-            let count = localStorage.getItem('pageViewCount');
-            if (count === null) {
-                count = 0;
-            } else {
-                count = parseInt(count);
-            }
-            count++;
-            localStorage.setItem('pageViewCount', count);
-            document.getElementById('page-view-count').textContent = count;
-        }
 
-        // 現在時刻の更新
+        // update
         function updateCurrentTime() {
             const now = new Date();
             const year = now.getFullYear();
@@ -224,14 +28,15 @@
             document.getElementById('time-display').textContent = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
         }
 
-        // ページ読み込み時にカウンターと時刻を初期化
+        // initialize 
         document.addEventListener('DOMContentLoaded', function() {
-            initializeCounter();
-            updateCurrentTime(); // 初回の時刻表示
-            setInterval(updateCurrentTime, 1000); // 1秒ごとに更新
+            updateCurrentTime(); //
+            setInterval(updateCurrentTime, 1000); // 
         });
     </script>
 </head>
+
+
 <body>
 
 <div id="container">
@@ -254,8 +59,8 @@
     大したことは書いていないかもしれない．</p>
     <ul>
         <li><a href="src/latex.html">LaTeXについて</a>
-            <ul>
-                <li>雛形は<a href="https://github.com/crutont0121/LaTeX_open/tree/main/prb" target="_blank">github</a>にまとめて置いてある．</li>
+          <ul>
+          <li>雛形は<a href="src/latex_hina.html">このページ</a>にまとめて置いてある．</li>
             </ul>
         </li>
         <li><a href="src/gnuplot.html">gnuplotの操作について</a>

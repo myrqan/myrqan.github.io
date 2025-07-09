@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <title>HOME</title>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+    <script type="text/javascript">
+        // fadein 
+        window.onload = function() {
+            document.body.classList.add('loaded');
+            updateCurrentTime(); // update
+            setInterval(updateCurrentTime, 1000); // 
+        };
+
+
+        // update
+        function updateCurrentTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time-display').textContent = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
+        }
+
+        // initialize 
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentTime(); //
+            setInterval(updateCurrentTime, 1000); // 
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>LaTeXについて（雛形）</h1>
+        </div>
+
+
+        <hr />
+
+        <div id="content">
+        <h2>LaTeXの雛形の例</h2>
+        <pre>
+        <code>
+        \documentclass[%
+          paper=a4paper,%
+          fontsize=10pt,%
+          jafontscale=0.875,%
+          %landscape,%
+          %twocolumn%
+          %fleqn,%
+          %sidenote_length=4cm
+        ]{jlreq}
+
+        %%% package import
+
+        \usepackage{graphicx}
+
+        \usepackage[no-math,deluxe,expert,hiragino-pron]{luatexja-preset}
+
+
+        %% ---------------------------------
+        %% FOR MATHEMATIC EQUATIONS
+        %% ---------------------------------
+        \usepackage{amsmath,amssymb,amsthm}
+        \usepackage{stmaryrd}
+        \usepackage{siunitx}
+        \usepackage{physics2}
+          \usephysicsmodule{ab}
+          \usephysicsmodule{braket}
+          \usephysicsmodule{diagmat}
+          \usephysicsmodule{doubleprod}
+          \usephysicsmodule{xmat}
+
+        \usepackage{mathtools}
+        \usepackage[ISO]{diffcoeff}
+        \usepackage[%
+          math-style=TeX,%
+          warnings-off={mathtools-colon,mathtools-overbracket}%
+        ]{unicode-math}
+        \usepackage{tikz}
+        %% -----------------------------------
+
+        \usepackage{ascmac}
+        \usepackage{comment}
+        \usepackage{empheq}
+        \usepackage[shortlabels,inline]{enumitem}
+        \usepackage{fancybox,fancyhdr}
+        \usepackage{float}
+        \usepackage{lastpage}
+        \usepackage[listings]{tcolorbox}
+        %\usepackage{titlesec}
+        \usepackage{ulem}
+        \usepackage{url}
+        \usepackage{verbatim}
+        \usepackage{wrapstuff}
+        \usepackage{varwidth}
+        \usepackage{color}
+        \usepackage[x11names]{xcolor}
+
+
+        \usepackage{fontspec}
+        \setmonofont{Inconsolatazi4} %% CHANGE DEFAULT TTFONT
+
+        \usepackage{listings,jvlisting}
+          \lstset{
+          basicstyle={\ttfamily\gtfamily},%
+          identifierstyle={\ttfamily},%
+          %commentstyle={\smallitshape},%
+          keywordstyle={\ttfamily\bfseries},%
+          %ndkeywordstyle={\small},%
+          %stringstyle={\ttfamily},%
+          frame={tblr},%
+          breaklines=true,%
+          columns=[l]{fullflexible},%
+          numbers=left,%
+          xrightmargin=0\zw,%
+          xleftmargin=5ex,%
+          xrightmargin=3ex,%
+          numberstyle={\ttfamily\scriptsize},%
+          numbersep=3ex,%
+          lineskip=-1.ex,%
+          backgroundcolor=\color{black!5!white},
+          fontadjust=true
+        }
+
+        \usepackage[luatex,pdfencoding=auto]{hyperref}
+          \hypersetup{%
+            colorlinks = true,%
+            %linkcolor = DeepSkyBlue1,%
+            linkcolor = black,%
+            urlcolor = orange,%
+            citecolor = Green,%
+        }
+
+
+        %%% CHANGE MATH FONT
+
+        \setmainfont{XITS}
+        \setmathfont{XITS Math}
+
+
+        %%% jlreq setup (modify)
+
+        \jlreqsetup{itemization_beforeafter_space=0pt}
+        \jlreqsetup{itemization_labelsep=1ex}
+        \jlreqsetup{caption_font=\small}
+        \jlreqsetup{caption_label_font=\small}
+
+        \ModifyHeading{section}{%
+          font={\large\bfseries\gtfamily\sffamily},%
+          after_space=0.7\baselineskip%
+        }
+        \ModifyHeading{subsection}{%
+          font={\large\bfseries\gtfamily\sffamily},%
+          after_space=0.7\baselineskip%
+        }
+        \ModifyHeading{subsubsection}{%
+          font={\normalsize\bfseries\gtfamily\sffamily}%
+        }
+
+        \numberwithin{equation}{section}
+
+        %%% (re)define macros
+        
+        \renewcommand{\figurename}{Fig.\,}
+        \renewcommand{\tablename}{Table\,}
+
+
+        \newcommand{\mctext}[1]{\mbox{\textcircled{\scriptsize{#1}}}}
+        \newcommand{\ctext}[1]{\textcircled{\scriptsize{#1}}}
+        \newcommand{\ds}{\displaystyle}
+        \newcommand{\comb}[2]{\left(\begin{matrix}#1\\#2\end{matrix}\right)}
+        \newcommand{\hs}{\hspace}
+        \newcommand{\qq}{\hspace{1em}}
+        \newcommand{\qqtext}[1]{\hspace{1em}\text{#1}\hspace{0.5em}}
+        \newcommand{\vs}{\vspace}
+        \newcommand{\emphvs}{\vspace{1em}\notag\\}
+        \newcommand{\ora}{\overrightarrow}
+        \newcommand{\oramr}[1]{\overrightarrow{\mathrm{#1}}}
+        \newcommand{\ol}{\overline}
+        \newcommand{\tri}{\triangle}
+        \newcommand{\mr}{\mathrm}
+        \newcommand{\mb}{\mathbb}
+        \newcommand{\mrvec}[1]{\overrightarrow{\mathrm{#1}}}
+        \newcommand{\itvec}{\overrightarrow}
+        %\newcommand{\bs}{\boldsymbol}
+        \newcommand{\bs}{\symbfit}%%symbfでdefine
+        \newcommand{\bsup}{\symbfup}
+
+        \newcommand{\ra}{\rightarrow}
+        \newcommand{\Ra}{\Rightarrow}
+        \newcommand{\lra}{\longrightarrow}
+        \newcommand{\Lra}{\Longrightarrow}
+        \newcommand{\la}{\leftarrow}
+        \newcommand{\La}{\Leftarrow}
+        \newcommand{\lla}{\longleftarrow}
+        \newcommand{\Lla}{\Longleftarrow}
+        \newcommand{\lr}{\leftrightarrow}
+        \newcommand{\llr}{\longleftrightarrow}
+        \newcommand{\Llr}{\Longleftrightarrow}
+        \newcommand{\mqty}[1]{\begin{matrix}#1\end{matrix}}
+        \newcommand{\avg}[1]{\left\langle{#1}\right\rangle}
+
+        \newcommand{\blue}[1]{\textcolor{blue}{#1}}
+        \newcommand{\red}[1]{\textcolor{red}{#1}}
+
+        \newcommand{\eval}[1]{\left.#1\right|}
+        \newcommand{\order}[1]{\mathcal{O}\ab(#1)}
+        \newcommand{\gr}{\nabla}
+        \newcommand{\di}{\nabla\cdot}
+        \newcommand{\ro}{\nabla\times}
+        \newcommand{\nb}{\nabla}
+
+
+
+        \renewcommand{\i}{\symup{i}}
+        \newcommand{\e}{\symup{e}}
+        \newcommand{\R}{\symbb{R}}
+        \newcommand{\N}{\symbb{N}}
+        \newcommand{\C}{\symbb{C}}
+        \newcommand{\al}{\alpha}
+        \newcommand{\be}{\beta}
+        \newcommand{\ga}{\gamma}
+        \newcommand{\de}{\delta}
+        \newcommand{\eps}{\varepsilon}
+        %\newcommand{\th}{\theta}
+
+
+        %% MATH OP.
+
+        \DeclareMathOperator{\GL}{GL}
+        \DeclareMathOperator{\SL}{SL}
+        \DeclareMathOperator{\diag}{diag}
+        \DeclareMathOperator{\tr}{tr}
+        \DeclareMathOperator{\sinc}{sinc}
+
+
+        %% COLOR DEFINITION
+
+        \definecolor{mycream}{HTML}{FEFAEA}
+        \definecolor{myvio}{HTML}{03155B}
+        \definecolor{blue-green}{rgb}{0.0, 0.87, 0.87}
+        \definecolor{bluegray}{rgb}{0.4, 0.6, 0.8}
+        \definecolor{mint}{rgb}{0.24, 0.71, 0.54}
+        \definecolor{dark-mint}{HTML}{3B876B}
+
+        %% DIFFCOEFF PKG SETTING
+
+        \difdef { l } { dn } { style = d^ }
+        \difdef { l } {} {outer-Rdelim = \,}
+        \difdef {f, s} {D}{op-symbol = \mathrm{D}}
+
+
+
+        \renewcommand{\contentsname}{Contents}
+        \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{fancy}}}
+
+
+
+        </code>
+        </pre>
+
+
+        <div id="current-time">
+            現在時刻: <span id="time-display"></span>
+        </div>
+
+        <div id="footer">
+            <p>&copy; 2025 myrqan</p>
+        </div>
+    </div>
+</body>
+</html>

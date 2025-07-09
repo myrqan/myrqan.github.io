@@ -1,385 +1,191 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
-    <title>今までに読んだ本とか（読んでいる本）のおすすめ</title>
-    <style type="text/css">
-        /* 全体設定 */
-        body {
-            font-family: "メイリオ", Meiryo, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, sans-serif;
-            font-size: 14px;
-            color: #333;
-            background: #f0f8ff; /* 淡い青の背景 */
-            margin: 0;
-            padding: 20px;
-            opacity: 0; /* 初期状態を透明に */
-            transition: opacity 1s ease-in-out; /* フェードインアニメーション */
-        }
-
-        body.loaded {
-            opacity: 1; /* 読み込み完了後に表示 */
-        }
-
-        /* コンテンツを囲むメインのボックス */
-        #container {
-            width: 800px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            border: 1px solid #c0d9ed; /* 少し濃い青系のボーダー */
-            -webkit-border-radius: 8px;
-            -moz-border-radius: 8px;
-            border-radius: 8px;
-            -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-        }
-
-        /* ヘッダー部分 */
-        #header {
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        h1 {
-            font-size: 2.2em;
-            color: #2e6496; /* 落ち着いた青 */
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-            margin: 0;
-        }
-
-        /* Twitterリンク */
-        .twitter-link {
-            text-align: right;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-        .twitter-link a {
-            color: #1da1f2; /* Twitterブランドカラー */
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .twitter-link a:hover {
-            text-decoration: underline;
-        }
-
-        /* ナビゲーション */
-        #nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            text-align: center;
-        }
-        #nav ul li {
-            display: inline-block;
-            margin: 0 12px;
-        }
-        #nav ul li a {
-            color: #555;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 7px 14px;
-            border: 1px solid #d0d0d0;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            background: #fcfcfc;
-            background: -webkit-linear-gradient(top, #fcfcfc, #ececec);
-            background: linear-gradient(to bottom, #fcfcfc, #ececec);
-            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            display: inline-block; /* transform用 */
-            -webkit-transition: all 0.2s ease-in-out;
-            -moz-transition: all 0.2s ease-in-out;
-            transition: all 0.2s ease-in-out;
-        }
-        #nav ul li a:hover {
-            background: #e9e9e9;
-            background: -webkit-linear-gradient(top, #e9e9e9, #fcfcfc);
-            background: linear-gradient(to bottom, #e9e9e9, #fcfcfc);
-            -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            color: #000;
-            -webkit-transform: translateY(-2px); /* 少し上に移動 */
-            -moz-transform: translateY(-2px);
-            transform: translateY(-2px);
-        }
-
-        /* セクション見出し */
-        h2 {
-            font-size: 1.6em;
-            color: #3b73a6;
-            border-bottom: 1px dotted #b0b0b0;
-            padding-bottom: 5px;
-            margin-top: 35px;
-            margin-bottom: 18px;
-        }
-
-        /* リンク */
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-
-        /* リスト */
-        ul {
-            list-style: disc;
-            margin-left: 25px;
-            padding: 0;
-            margin-bottom: 15px;
-        }
-        ul ul {
-            list-style: circle;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        li {
-            margin-bottom: 7px;
-        }
-
-        /* 水平線 */
-        hr {
-            border: 0;
-            height: 1px;
-            background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-            margin: 25px 0;
-        }
-
-        /* フッター */
-        #footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 10px;
-            border-top: 1px solid #eee;
-            font-size: 0.8em;
-            color: #888;
-        }
-
-        /* キリ番カウンター */
-        #counter-area {
-            text-align: center;
-            font-size: 1.1em;
-            color: #555;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px dashed #cccccc;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-        }
-
-        /* 現在時刻表示 */
-        #current-time {
-            text-align: center;
-            font-size: 0.9em;
-            color: #777;
-            margin-top: 15px;
-        }
-    </style>
+    <title>HOME</title>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
     <script type="text/javascript">
-        // ページ読み込み時のフェードイン
-        window.onload = function() {
-            document.body.classList.add('loaded');
-            updateCurrentTime(); // 時刻表示を更新
-            setInterval(updateCurrentTime, 1000); // 1秒ごとに時刻を更新
-        };
+      // fadein 
+      window.onload = function() {
+        document.body.classList.add('loaded');
+        updateCurrentTime(); // update
+        setInterval(updateCurrentTime, 1000); // 
+      };
 
-        // キリ番（簡易的なローカルストレージ使用）
-        function initializeCounter() {
-            let count = localStorage.getItem('pageViewCount');
-            if (count === null) {
-                count = 0;
-            } else {
-                count = parseInt(count);
-            }
-            count++;
-            localStorage.setItem('pageViewCount', count);
-            document.getElementById('page-view-count').textContent = count;
-        }
 
-        // 現在時刻の更新
-        function updateCurrentTime() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            const day = now.getDate().toString().padStart(2, '0');
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('time-display').textContent = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
-        }
+      // update
+      function updateCurrentTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('time-display').textContent = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
+      }
 
-        // ページ読み込み時にカウンターと時刻を初期化
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCounter();
-            updateCurrentTime(); // 初回の時刻表示
-            setInterval(updateCurrentTime, 1000); // 1秒ごとに更新
-        });
+      // initialize 
+      document.addEventListener('DOMContentLoaded', function() {
+        updateCurrentTime(); //
+        setInterval(updateCurrentTime, 1000); // 
+      });
     </script>
-</head>
-<body>
-    <div id="container">
-        <div id="header">
-            <h1>今までに読んだ本とか（読んでいる本）のおすすめ</h1>
-        </div>
+  </head>
 
-        <div id="nav">
-            <ul>
-                <li><a href="#数学">数学</a></li>
-                <li><a href="#物理">物理</a></li>
-                <li><a href="#気になっているけどまだちゃんと読めていない本">気になっているけどまだ（ちゃんと）読めていない本</a></li>
-            </ul>
-        </div>
+
+
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>今までに読んだ本とか（読んでいる本）のおすすめ</h1>
+      </div>
+
+      <div id="nav">
+        <ul>
+          <li><a href="#数学">数学</a></li>
+          <li><a href="#物理">物理</a></li>
+          <li><a href="#気になっているけどまだちゃんと読めていない本">気になっているけどまだ（ちゃんと）読めていない本</a></li>
+        </ul>
+      </div>
+
+      <hr />
+
+      <div id="content">
+        <h2 id="数学">数学</h2>
+        <ul>
+          <li>
+            <em>理工系の微分積分学</em>，（吹田・新保），学術図書出版社
+            <blockquote>
+              クラス指定の微分積分学の教科書．物理で使う分には十分な説明だった．章末の演習問題も充実していた印象．
+            </blockquote>
+          </li>
+          <li>
+            <em>基礎と応用ベクトル解析 （ライブラリ理工新数学 T5）</em>，（清水），サイエンス社
+            <blockquote>
+              教科書として使用．ベクトル解析初学者でも読みやすい．演習問題を解けば物理学で使うベクトル解析は大体習得できる．
+            </blockquote>
+          </li>
+          <li>
+            <em>自然科学者のための数学概論（増訂版）</em>，（寺沢），岩波書店
+          </li>
+          <li>
+            <em>自然科学者のための数学概論（応用編）</em>，（寺沢），岩波書店
+            <blockquote>
+              辞書的に使っている．物理数学に関する和書としては私の知る限り一番網羅的．
+            </blockquote>
+          </li>
+          <li>
+            <em>Mathematical Methods For Physicists (7th ed.)</em>, (Arfken, Weber & Harris)，Academic Press
+            <blockquote>
+              洋書で物理数学的な立場から展開されている本．演習問題もたくさん載っている感じ．必要になった節だけを読むなどして読んでいる．いつか演習をときたい．
+            </blockquote>
+          </li>
+          <li>
+            <em>Table of Integrals, Series, and Products (8th ed.)</em>，（Gradshteyn & Ryzhik），Academic Press
+            <blockquote>
+              これも辞書的に使っている．積分・級数の公式集的なもの．結果だけ載っている．途中式はない．
+            </blockquote>
+          </li>
+        </ul>
 
         <hr />
 
-        <div id="content">
-            <h2 id="数学">数学</h2>
-            <ul>
-                <li>
-                    <em>理工系の微分積分学</em>，（吹田・新保），学術図書出版社
-                    <blockquote>
-                        クラス指定の微分積分学の教科書．物理で使う分には十分な説明だった．章末の演習問題も充実していた印象．
-                    </blockquote>
-                </li>
-                <li>
-                    <em>基礎と応用ベクトル解析 （ライブラリ理工新数学 T5）</em>，（清水），サイエンス社
-                    <blockquote>
-                        教科書として使用．ベクトル解析初学者でも読みやすい．演習問題を解けば物理学で使うベクトル解析は大体習得できる．
-                    </blockquote>
-                </li>
-                <li>
-                    <em>自然科学者のための数学概論（増訂版）</em>，（寺沢），岩波書店
-                </li>
-                <li>
-                    <em>自然科学者のための数学概論（応用編）</em>，（寺沢），岩波書店
-                    <blockquote>
-                        辞書的に使っている．物理数学に関する和書としては私の知る限り一番網羅的．
-                    </blockquote>
-                </li>
-                <li>
-                    <em>Mathematical Methods For Physicists (7th ed.)</em>, (Arfken, Weber & Harris)，Academic Press
-                    <blockquote>
-                        洋書で物理数学的な立場から展開されている本．演習問題もたくさん載っている感じ．必要になった節だけを読むなどして読んでいる．いつか演習をときたい．
-                    </blockquote>
-                </li>
-                <li>
-                    <em>Table of Integrals, Series, and Products (8th ed.)</em>，（Gradshteyn & Ryzhik），Academic Press
-                    <blockquote>
-                        これも辞書的に使っている．積分・級数の公式集的なもの．結果だけ載っている．途中式はない．
-                    </blockquote>
-                </li>
-            </ul>
+        <h2 id="物理">物理</h2>
+        <p>途中まで読んだものには☆をしている．割とちゃんと読んだ本には☆をつけていない．</p>
+        <ul>
+          <li>
+            <em>基幹講座 物理学 力学</em>，（篠本・坂口），東京図書
+            <blockquote>
+              クラス指定授業の教科書．高校力学の延長の感じで読める．易しい．
+            </blockquote>
+          </li>
+          <li>
+            <em>基幹講座 物理学 解析力学</em>，（畑），東京図書
+            <blockquote>
+              解析力学初学でも読みやすかった．解析力学がわかった気になれる．ゼミ・授業で使用．
+            </blockquote>
+          </li>
+          <li>
+            ☆<em>A Treatise on the Analytical Dynamics of Particles and Rigid Bodies</em>，（Whittaker），Cambridge University Press
+            <blockquote>
+              Chapter 6に剛体の力学（解析力学）が載っている．例をいっぱいあげていて良さげな印象．ちゃんと読みたい．
+            </blockquote>
+          </li>
+          <li>
+            <em>物理テキストシリーズ 電磁気学</em>，（砂川），岩波書店
+            <blockquote>
+              薄いほうの砂川電磁気学．こっちは初学者向きで読みやすい．薄いのですぐ読み終えることができる．電磁気学の1冊めとしてこれを読んだ．
+            </blockquote>
+          </li>
+          <li>
+            ☆<em>Classical Electodynamics (3rd ed.)</em>，（Jackson），John Wiley & Sons
+            <blockquote>
+              電磁気学2冊めのひとに良さげ．演習問題をとこう．解説がないので難しいかも．
+              電磁気学の洋書ではGriffithsもあるが，これはJacksonよりも易しく，初学でも読みやすい．1冊めとしてGriffithsを読んでもいいかもしれない．
+            </blockquote>
+          </li>
+          <li>
+            ☆<em>シリーズ宇宙物理学の基礎 宇宙流体力学の基礎［改訂版］</em>，（福江・和田・梅村），日本評論社
+            <blockquote>
+              流体力学の宇宙物理学への応用について，主要な部分を押さえてある．読みやすい．
+            </blockquote>
+          </li>
+          <li>
+            ☆<em>Statistical Mechanics (4th ed.)</em>, (Pathria & Beale)，Academic Press
+            <blockquote>
+              洋書でもよければ，統計力学の本としてこんなものがある．演習問題が充実している印象．
+            </blockquote>
+          </li>
+        </ul>
 
-            <hr />
+        <hr />
 
-            <h2 id="物理">物理</h2>
-            <p>途中まで読んだものには☆をしている．割とちゃんと読んだ本には☆をつけていない．</p>
-            <ul>
-                <li>
-                    <em>基幹講座 物理学 力学</em>，（篠本・坂口），東京図書
-                    <blockquote>
-                        クラス指定授業の教科書．高校力学の延長の感じで読める．易しい．
-                    </blockquote>
-                </li>
-                <li>
-                    <em>基幹講座 物理学 解析力学</em>，（畑），東京図書
-                    <blockquote>
-                        解析力学初学でも読みやすかった．解析力学がわかった気になれる．ゼミ・授業で使用．
-                    </blockquote>
-                </li>
-                <li>
-                    ☆<em>A Treatise on the Analytical Dynamics of Particles and Rigid Bodies</em>，（Whittaker），Cambridge University Press
-                    <blockquote>
-                        Chapter 6に剛体の力学（解析力学）が載っている．例をいっぱいあげていて良さげな印象．ちゃんと読みたい．
-                    </blockquote>
-                </li>
-                <li>
-                    <em>物理テキストシリーズ 電磁気学</em>，（砂川），岩波書店
-                    <blockquote>
-                        薄いほうの砂川電磁気学．こっちは初学者向きで読みやすい．薄いのですぐ読み終えることができる．電磁気学の1冊めとしてこれを読んだ．
-                    </blockquote>
-                </li>
-                <li>
-                    ☆<em>Classical Electodynamics (3rd ed.)</em>，（Jackson），John Wiley & Sons
-                    <blockquote>
-                        電磁気学2冊めのひとに良さげ．演習問題をとこう．解説がないので難しいかも．
-                        電磁気学の洋書ではGriffithsもあるが，これはJacksonよりも易しく，初学でも読みやすい．1冊めとしてGriffithsを読んでもいいかもしれない．
-                    </blockquote>
-                </li>
-                <li>
-                    ☆<em>シリーズ宇宙物理学の基礎 宇宙流体力学の基礎［改訂版］</em>，（福江・和田・梅村），日本評論社
-                    <blockquote>
-                        流体力学の宇宙物理学への応用について，主要な部分を押さえてある．読みやすい．
-                    </blockquote>
-                </li>
-                <li>
-                    ☆<em>Statistical Mechanics (4th ed.)</em>, (Pathria & Beale)，Academic Press
-                    <blockquote>
-                        洋書でもよければ，統計力学の本としてこんなものがある．演習問題が充実している印象．
-                    </blockquote>
-                </li>
-            </ul>
+        <h2 id="気になっているけどまだちゃんと読めていない本">気になっているけどまだ（ちゃんと）読めていない本</h2>
+        <ul>
+          <li>
+            <em>Gravity: An Introduction to Einstein's General Relativity</em>，(Hartle)，Cambridge University Press
+            <blockquote>
+              <a href="https://web.physics.ucsb.edu/~gravitybook/">website</a> (errata etc.)
+            </blockquote>
+          </li>
+          <li>
+            <em>An Introduction to General Relativity Spacetime and Geometry</em>, (Sean M. Carroll)
+            <blockquote>
+              <a href="https://www.preposterousuniverse.com/spacetimeandgeometry/">website</a>
+            </blockquote>
+          </li>
+          <li>
+            <em>Quantum Mechanics</em>, (Claude Cohen-Tannoudji, Bernard Diu, Franck Laloë)
+          </li>
+          <li>
+            <em>Modern Quantum Mechanics (3rd ed.)</em>, (J. J. Sakurai , Jim Napolitano)
+          </li>
+          <li>
+            <em>Classical Mechanics (3rd ed.)</em>, (Goldstein, Poole, Safko)
+          </li>
+          <li>
+            <em>Fluid Mechanics (2nd ed.)</em>, (Landau, Lifshitz)
+          </li>
+          <li>
+            <em>Optics (5th ed.)</em>, (Eugene Hecht)
+          </li>
+          <li>
+            <em>Introdution to Magnetohydrodynamics (2nd ed.)</em> (P. A. Davidson)
+          </li>
+        </ul>
+      </div>
 
-            <hr />
+      <div id="current-time">
+        現在時刻: <span id="time-display"></span>
+      </div>
 
-            <h2 id="気になっているけどまだちゃんと読めていない本">気になっているけどまだ（ちゃんと）読めていない本</h2>
-            <ul>
-                <li>
-                    <em>Gravity: An Introduction to Einstein's General Relativity</em>，(Hartle)，Cambridge University Press
-                    <blockquote>
-                        <a href="https://web.physics.ucsb.edu/~gravitybook/">website</a> (errata etc.)
-                    </blockquote>
-                </li>
-                <li>
-                    <em>An Introduction to General Relativity Spacetime and Geometry</em>, (Sean M. Carroll)
-                    <blockquote>
-                        <a href="https://www.preposterousuniverse.com/spacetimeandgeometry/">website</a>
-                    </blockquote>
-                </li>
-                <li>
-                    <em>Quantum Mechanics</em>, (Claude Cohen-Tannoudji, Bernard Diu, Franck Laloë)
-                </li>
-                <li>
-                    <em>Modern Quantum Mechanics (3rd ed.)</em>, (J. J. Sakurai , Jim Napolitano)
-                </li>
-                <li>
-                    <em>Classical Mechanics (3rd ed.)</em>, (Goldstein, Poole, Safko)
-                </li>
-                <li>
-                    <em>Fluid Mechanics (2nd ed.)</em>, (Landau, Lifshitz)
-                </li>
-                <li>
-                    <em>Optics (5th ed.)</em>, (Eugene Hecht)
-                </li>
-                <li>
-                    <em>Introdution to Magnetohydrodynamics (2nd ed.)</em> (P. A. Davidson)
-                </li>
-            </ul>
-        </div>
-
-        <div id="current-time">
-            現在時刻: <span id="time-display"></span>
-        </div>
-
-        <div id="footer">
-            <p>&copy; 2025 myrqan</p>
-        </div>
+      <div id="footer">
+        <p>&copy; 2025 myrqan</p>
+      </div>
     </div>
-</body>
+  </body>
 </html>
