@@ -45,6 +45,7 @@ h1 {
     margin: 0;
 }
 
+
 /* Twitter */
 .twitter-link {
     text-align: right;
@@ -65,7 +66,7 @@ h1 {
     list-style: none;
     padding: 0;
     margin: 20px 0;
-    text-align: center;
+    text-align: left;
 }
 #nav ul li {
     display: inline-block;
