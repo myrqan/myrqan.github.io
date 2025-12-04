@@ -1,109 +1,153 @@
 <!DOCTYPE html>
-<html lang="ja">
-
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Style-Type" content="text/css" />
-    <meta http-equiv="Content-Script-Type" content="text/javascript" />
-    <title>HOME</title>
-    <link rel="stylesheet" type="text/css" href="../style.css" />
-    <script type="text/javascript">
-        // fadein 
-        window.onload = function() {
-            document.body.classList.add('loaded');
-            updateCurrentTime(); // update
-            setInterval(updateCurrentTime, 1000); // 
-        };
-
-
-        // update
-        function updateCurrentTime() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = (now.getMonth() + 1).toString().padStart(2, '0');
-            const day = now.getDate().toString().padStart(2, '0');
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('time-display').textContent = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
-        }
-
-        // initialize 
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCurrentTime(); //
-            setInterval(updateCurrentTime, 1000); // 
-        });
-    </script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tips</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-    <div id="container">
-        <div id="header">
-            <h1>小ネタ集</h1>
-            <p>実行環境は <code>zsh 5.9 (arm-apple-darwin24.0.0)</code></p>
-        </div>
-
-        <div id="nav">
-            <ul>
-                <li><a href="#factorコマンド--primeコマンド"><code>factor</code>コマンド / <code>prime</code>コマンド</a></li>
-                <li><a href="#ディレクトリ中のファイルフォルダの数">ディレクトリ中のファイル・フォルダの数</a></li>
-                <li><a href="#pngを統合してgifを作る">pngを統合して動画ファイルにする</a></li>
-            </ul>
-        </div>
-
-        <hr />
-
-        <div id="content">
-            <h2 id="factorコマンド--primeコマンド"><code>factor</code>コマンド / <code>prime</code>コマンド</h2>
-            <ul>
-                <li><code>factor</code>: 入力した数を因数分解します。オプションとして<code>-h</code>, <code>--exponents</code>で指数表記にできます。</li>
-                <li><code>prime</code>: 入力した数が素数か判定します。</li>
-            </ul>
-            <pre><code>$ factor 100
-100: 2 2 5 5
-
-$ factor -h 100
-100: 2^2 5^2
-
-$ factor -h 65537
-65537: 65537
-
-$ openssl prime 918247
-E02E7 (918247) is not prime
-
-$ openssl prime 100003
-186A3 (100003) is prime
-
-$ echo -n "number: "; read num; [ "$num" -eq 1 ] && echo "is NOT prime" || ([ $(factor "$num" | wc -w) -gt 2 ] && echo "is NOT prime" || echo "is prime")
-number: 100000000000031
-is prime
-</code></pre>
-
-            <h2 id="ディレクトリ中のファイルフォルダの数">ディレクトリ中のファイル・フォルダの数</h2>
-            <p>例えば、</p>
-            <pre><code>$ touch test_{001..050}.txt
-</code></pre>
-            <p>で50個の連番ファイル（<code>test_001.txt</code>から<code>test_050.txt</code>）を作ったとすると</p>
-            <pre><code>$ ls | wc -l
-50
-</code></pre>
-            <p>となります。</p>
-
-            <h2 id="pngを統合してgifを作る">pngを統合して動画ファイルにする</h2>
-            <pre><code>$ magick $(ls *.png | sort -V) out.gif
-</code></pre>
-            <p>出力ファイルは<code>out.gif</code>になります。</p>
-            <pre><code>ffmpeg -framerate 10 -pattern_type glob -i "*.png" -c:v libx264 -pix_fmt yuv420p output.mp4
-</code></pre>
-            <p>出力ファイルは<code>output.mp4</code>になります。</p>
-        </div>
-
-        <div id="current-time">
-            現在時刻: <span id="time-display"></span>
-        </div>
-
-        <div id="footer">
-            <p>&copy; 2025 myrqan</p>
-        </div>
-    </div>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#小ネタ集" id="toc-小ネタ集">小ネタ集</a>
+<ul>
+<li><a href="#factor-prime" id="toc-factor-prime">factor /
+prime</a></li>
+<li><a href="#ディレクトリ中のファイルフォルダの数"
+id="toc-ディレクトリ中のファイルフォルダの数">ディレクトリ中のファイル・フォルダの数</a></li>
+<li><a href="#画像を統合して動画ファイルにする"
+id="toc-画像を統合して動画ファイルにする">画像を統合して動画ファイルにする</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="小ネタ集">小ネタ集</h2>
+<p>すべて<code>zsh 5.9 (arm-apple-darwin24.0.0)</code>で動作を確認しています</p>
+<h3 id="factor-prime">factor / prime</h3>
+<ul>
+<li><code>factor</code>:
+入力した数を因数分解する．オプション<code>-h</code>や<code>--exponents</code>で指数表記にできる</li>
+<li><code>prime</code> (openssl):
+入力した数が素数であるかの判定を行う</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> factor 100</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">100:</span> 2 2 5 5</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> factor <span class="at">-h</span> 100</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">100:</span> 2^2 5^2</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> factor <span class="at">-h</span> 65537</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">65537:</span> 65537</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl prime 918247</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">E02E7</span> <span class="er">(</span><span class="ex">918247</span><span class="kw">)</span> <span class="ex">is</span> not prime</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> openssl prime 100003</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">186A3</span> <span class="er">(</span><span class="ex">100003</span><span class="kw">)</span> <span class="ex">is</span> prime</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> echo <span class="at">-n</span> <span class="st">&quot;number: &quot;</span><span class="kw">;</span> <span class="bu">read</span> <span class="va">num</span><span class="kw">;</span> <span class="bu">[</span> <span class="st">&quot;</span><span class="va">$num</span><span class="st">&quot;</span> <span class="ot">-eq</span> 1 <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;is NOT prime&quot;</span> <span class="kw">||</span> <span class="kw">(</span><span class="bu">[</span> <span class="va">$(</span><span class="ex">factor</span> <span class="st">&quot;</span><span class="va">$num</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-w</span><span class="va">)</span> <span class="ot">-gt</span> 2 <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;is NOT prime&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;is prime&quot;</span><span class="kw">)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">number:</span> 100000000000031</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">is</span> prime</span></code></pre></div>
+<h3
+id="ディレクトリ中のファイルフォルダの数">ディレクトリ中のファイル・フォルダの数</h3>
+<p>例えば</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> touch test_<span class="dt">{</span><span class="dv">001</span><span class="dt">..</span><span class="dv">050</span><span class="dt">}</span>.txt</span></code></pre></div>
+<p>で50個の連番ファイル（<code>test_001.txt</code>から<code>test_050.txt</code>）を作ったとすると</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">50</span></span></code></pre></div>
+<p>となる．</p>
+<h3
+id="画像を統合して動画ファイルにする">画像を統合して動画ファイルにする</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ffmpeg <span class="at">-framerate</span> 10 <span class="at">-pattern_type</span> glob <span class="at">-i</span> <span class="st">&quot;*.png&quot;</span> <span class="at">-c:v</span> libx264 <span class="at">-pix_fmt</span> yuv420p output.mp4</span></code></pre></div>
+<p>出力ファイルは<code>output.mp4</code>になる．</p>
 </body>
 </html>
