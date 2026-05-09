@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }} | myrqanの備忘録</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+</head>
+<body>
+<div align="center">
+    <table width="820" class="main-container" cellspacing="0" cellpadding="0">
+        <tr>
+            <td colspan="2" class="header-section">
+                <h1>myrqanの備忘録</h1>
+            </td>
+        </tr>
+        <tr>
+            <td width="200" class="sidebar">
+                {% include sidebar.html %}
+            </td>
+            <td class="content-body">
+                {{ content }}
+            </td>
+        </tr>
+    </table>
+    <div class="footer-area">
+        <p>Copyright © 2026 myrqan All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>

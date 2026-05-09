@@ -1,3 +1,7 @@
 *.code-workspace
 *.md
 *.DS_Store
+_site/
+.jekyll-cache/
+.bundle/
+vendor/
