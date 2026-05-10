@@ -7,7 +7,18 @@ title: 小ネタ集
 <h2 id="小ネタ集">小ネタ集</h2>
 <p>すべて <code>zsh 5.9 (arm-apple-darwin24.0.0)</code> で動作を確認．</p>
 
-<h3 id="factor-prime">数値の判定（<code>factor</code> / <code>openssl prime</code>）</h3>
+<h3>画像を統合して動画ファイルにする</h3>
+<p>連番の静止画（PNG等）を、互換性の高い H.264 形式の動画に変換する．</p>
+
+<div class="code-block-container">
+    <pre><code>$ ffmpeg -framerate 10 -pattern_type glob -i "*.png" -c:v libx264 -pix_fmt yuv420p output.mp4</code></pre>
+</div>
+<p>
+    出力ファイルは <code>output.mp4</code> となる．<code>-pix_fmt yuv420p</code> を指定することで，QuickTime Player 等でも再生可能になる．
+</p>
+
+
+<h3>数値の判定（<code>factor</code> / <code>openssl prime</code>）</h3>
 <p>
     入力した数値を因数分解したり，素数であるかの判定を行ったりするコマンド．
 </p>
@@ -49,12 +60,3 @@ $ echo -n "number: "; read num; [ "$num" -eq 1 ] && echo "is NOT prime" || ([ $(
 </div>
 <p>※ <code>touch test_{001..050}.txt</code> などで連番ファイルを作成した際の確認に便利．</p>
 
-<h3>画像を統合して動画ファイルにする</h3>
-<p>連番の静止画（PNG等）を、互換性の高い H.264 形式の動画に変換する．</p>
-
-<div class="code-block-container">
-    <pre><code>$ ffmpeg -framerate 10 -pattern_type glob -i "*.png" -c:v libx264 -pix_fmt yuv420p output.mp4</code></pre>
-</div>
-<p>
-    出力ファイルは <code>output.mp4</code> となる．<code>-pix_fmt yuv420p</code> を指定することで，QuickTime Player 等でも再生可能になる．
-</p>
