@@ -157,3 +157,11 @@ pre code {
     color: inherit;
     padding: 0;
 }
+
+details {
+    background-color: #FFF3E0; /* ほんのり色づくオレンジ */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #FFCCBC;
+    margin-bottom: 10px;
+}
