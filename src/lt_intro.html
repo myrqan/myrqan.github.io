@@ -1,0 +1,38 @@
+---  
+layout: default  
+title: latex intro
+---
+
+
+<h3>よく使うパッケージ</h3>
+<p>
+LaTeXを用いて文章を作成するときによく利用するパッケージとその内容について簡単に列挙する．いずれも <code>\usepackage{hoge}</code> とすることで利用可能になる．パッケージの詳細な使用方法についてはターミナルなどで <code>$ texdoc hoge</code> とすれば使用法についての pdf 文章が得られる（あるいは <a href="https://ctan.org">CTAN</a> でも検索することができる）．
+</p>
+<ul>
+  <li>amsmath, amssymb, amsthm：（文章中に使う環境，記号の導入）</li>
+  <li>ascmac：（boxnote, itembox, mask, screen, shadeboxとか）</li>
+  <li>comment：（文章のある部分をまとめてコメントアウトする）</li>
+  <li>enumitem：（箇条書き）</li>
+  <li>fancyhdr：（ヘッダーとかフッターを記述するため）</li>
+  <li>here：（図表をこの場所！って思う場所に配置する）</li>
+  <li>siunitx：（単位のついた数字とかを簡単に書く）</li>
+  <li>physics2：（各種，数式の表記を簡略化してくれる）</li>
+  <ul>
+  <li>physicsパッケージはsiunitxとの衝突のため，非推奨． 詳しくはパッケージの文章を読んでください． physics2では以下（など）のモジュールを利用することで，表記の簡略化ができる．</li>
+  <li>ab, bracket, diagmat, doubleprod, xmat：それぞれのモジュールは <code>\usephysicsmodule{name_of_module}</code> で利用可能になる．たとえば <code>\usephysicsmodule{ab}</code> ．</li>
+  </ul>
+  <li>diffcoeff：（微分のコマンドを提供, physics2には付属していない）</li>
+</ul>
+
+<h4>何かの機会に使えそうなパッケージ</h4>
+<ul>
+  <li>circledsteps：丸囲みの文字</li>
+  <li>esvect：文字の上に矢印を書くタイプのベクトルの表記で役に立つ</li>
+</ul>
+
+<h3>LaTeXで使えるフォントを確認する方法</h3>
+<ol>  
+  <li>ターミナルで <code>$ sudo mktexlsr</code> とする．権限を求められるのでパスワードを入力する（TeXに関連するファイルリストの更新）．</li>  
+  <li><code>$ luaotfload-tool --update</code></li>
+  <li><code>$ luaotfload-tool --list= > fontslist.txt</code> とすると，使用できるフォントが <code>fontslist.txt</code> に一覧として入っている．</li>
+</ol>
