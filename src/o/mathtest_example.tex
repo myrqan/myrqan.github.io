@@ -1,0 +1,82 @@
+\documentclass[paper=a4paper,fontsize=7.5pt,jafontsize=7.5pt,twoside]{jlreq}
+\usepackage{mathtest}
+
+\SetTitle{「タイトル」}
+\SetDate{「任意の日付」}
+\SetRange{%
+  \RangeBox{あいうえお}\\
+  こういうふうに\\
+  行を分割してかけます
+}
+
+\begin{document}
+\MakeTestPage{%
+\Prob 使用法の解説：
+\begin{enumerate}[label={\arabic*$^\circ$}]%  
+  \item プリアンブル部で \verb|\SetTitle{}| ， \verb|\SetDate{}| ， \verb|\SetRange{}| として各種パラメータを代入します． \verb|\SetDate| のみ，デフォルト値は \verb|\today| と設定しています．
+  \item 問題となる部分については， \verb|\MakeTestPage{}{}| で設定します．
+    \begin{enumerate}[(1)]%  
+      \item 左ページと右ページの出力内容は，ページ数の偶奇で判定をしているので，明示的な操作は不要です．
+      \item 1つめの引数は左列に出力する内容を制御し，2つめの引数は右列の内容を制御します．
+      \item 問題の下にもう一つ問題の欄を作成したい場合，例えば， \verb|\sep{10cm}| とすることで問題の最後の行から \verb|10cm| のところに横線が引かれ，その後 \verb|\Prob foobar| のように問題を書くことができます．長さが大きくなったときの動作は保証されません．
+    \end{enumerate}%
+  \item \verb|\Prob| で問題番号を表示します．カウンタになっているので， \verb|\Prob| とするたびに数字が増えます．
+  \item 詳しい設定については \verb|mathtest.sty| を参照してください．
+  \item 次ページには使用例を示します．
+  \item そもそもこれは，横向きA3用紙に2ページ分を印刷することを想定しています．
+  \item このコードはjlreq styleを用いて，LuaHBTeX Version 1.24.0 (TeX Live 2026)で動作することを確認していますが，使用環境によっては正常に動作しない可能性があります．
+\end{enumerate}%
+
+\sep{7cm}
+
+\Prob ここには問題を書きます．
+
+}{%
+\Prob ここにも問題を書きます
+}
+\MakeTestPage{%
+\Prob 座標平面上に動点Pがあり，次のルールに従って，移動するものとする．\\
+ルール：サイコロを1個振って，
+\begin{itemize}%  
+  \item[] 1，2の目が出たら$(x,y) \rightarrow (x+1, y)$のように移動し，
+  \item[] 3，4の目が出たら$(x,y) \rightarrow (x, y+1)$のように移動し，
+  \item[] 5，6の目が出たら移動しない．
+\end{itemize}%
+はじめ点Pは原点$(0,0)$にあるとし，1個のサイコロを$n$回振った時点で，点Pの座標が$(a, b)$にある
+確率を$P_n(a, b)$とする．\\
+ただし，サイコロの目はどれも同様な確からしさで出るものとする．
+\begin{enumerate}[(1)]%  
+  \item $P_6(4,0)$，$P_6(2,2)$を求めよ．
+  \item $\sum\limits_{k=0}^{n} P_{2n+2} (2k,2n-2k)$を，$n$を用いて表わせ．
+    \hfill{(25点)}
+\end{enumerate}%
+
+\sep{10cm}
+
+\Prob $n$を2以上の自然数とする．1個のさいころを続けて$n$回投げる試行を行い，
+出た目を順に$X_1, X_2, \cdots , X_n$とする．$X_1, X_2, \cdots, X_n$の最小公倍数が12となる確率を
+$n$の式で表せ．
+\hfill{(15点)}
+}{%
+\Prob 2名が先攻と後攻に分かれ，次のようなゲームを行う．
+\begin{enumerate}[(i)]%  
+  \item \textbf{正五角形}の5つの頂点を反時計回りにA，B，C，D，Eとする．
+    両者はコマを1つずつ持ち，ゲームの開始時には先攻の持ちゴマはAに，後攻の
+    持ちゴマはDに置いてあるとする．
+  \item 先攻から始めて，表と裏が等確率で出るコインを投げる．
+    \begin{itemize}%  
+      \item[] 表が出れば，自分のコマを反時計回りに隣の頂点に動かし，
+      \item[] 裏が出れば，自分のコマを時計回りに隣の頂点に動かす．\\
+        もし移動先に相手のコマがあれば，その時点でゲームは終了とし，コインを投げた者の勝ちとする．
+    \end{itemize}%
+    ちょうど$n$回コインを投げて勝敗が決る確率を$p_n$とする．
+\end{enumerate}%
+\begin{enumerate}[(1)]%  
+  \item $p_2$，$p_3$を求めよ．
+  \item $p_n$を求めよ．
+  \item このゲームの先攻が勝つ確率は$p = \sum\limits_{k=1}^{\infty}p_{2k-1}$で与えられる．\\
+    $p$を求めよ．\hfill{(30点)}
+\end{enumerate}%
+}
+
+\end{document}
